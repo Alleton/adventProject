@@ -180,47 +180,109 @@ public class Solver7 {
 					// 
 					// boucle pour chercher le wire entree1
 					for ( int j = 0 ; j < circuit.getCircuitSize() ; j ++) {
-						//System.out.println("cherche " + wire.getEntry1()  + " = " + circuit.getSolver7wire()[j].getWirename() );
 						if ( circuit.getSolver7wire()[j].getWirename().equals(wire.getEntry1() ) &&
+								circuit.getSolver7wire()[j].getDone()	) {
+							// nous avons trouve la source
+							wire.setEntry1value(circuit.getSolver7wire()[j].getWirevalue());
+							wire.setEntry1Done(true);
+							circuit.getSolver7wire()[i] = wire;
+							break ;
+						} // entry name found and OK
+					} // for j
+				} // !wire.getEntry1Done
+
+				/* next second entry value */
+				if ( (!wire.getEntry2Done()) && (wire.getNboper() == 2)  && (wire.getEntry2Done()== false ) ) {
+					// boucle pour chercher le wire entree2
+					for ( int j = 0 ; j < circuit.getCircuitSize() ; j ++) {
+						//System.out.println("cherche " + wire.getEntry1()  + " = " + circuit.getSolver7wire()[j].getWirename() );
+						if ( circuit.getSolver7wire()[j].getWirename().equals(wire.getEntry2() ) &&
 								circuit.getSolver7wire()[j].getDone()	) {
 							// nous avons trouve la source
 							/* System.out.println(  wire.getWirename()+
 									             " " + circuit.getSolver7wire()[j].getWirename() +
 									             " " + circuit.getSolver7wire()[j].getDone() );
 									             */
-							wire.setEntry1value(circuit.getSolver7wire()[j].getWirevalue());
-							wire.setEntry1Done(true);
+							wire.setEntry2value(circuit.getSolver7wire()[j].getWirevalue());
+							wire.setEntry2Done(true);
 							circuit.getSolver7wire()[i] = wire;
 							break ;
-						}
-					}
-				}
+						} // entry name found and OK
+					} // for j
+				} // !wire.getEntry2Done
 			}
-			
-		}
+		} // first affectations
+		
+		/*
+		 * second 
+		 */
 		
 		for ( int i =0 ; i< circuit.getCircuitSize() ; i++) {
 			// System.out.println( " circuit " + i + " " + circuit.getSolver7wire().toString()) ;
 			Solver7wire wire = circuit.getSolver7wire()[i] ;
-			//System.out.println( " wire  " + i + " " + wire.getWirename()+ " " +" nombre operateurs " + " " + wire.getNboper()) ;
-		
-			switch (wire.getNboper()) {
-				case 0: {
-					// si deja affecte rien
-					if (!wire.getDone()) {
+			// si deja affecte rien
+			if ( (!wire.getDone())&& wire.getEntry1Done())  {
+				// il faut que le premier operande soit connu ..
+				switch (wire.getNboper()) {
+					case 0: {
 					// si nous avons une valeur numerique ==> affecter
 						if (wire.getEntry1Done()) {
 							wire.setWirevalue(wire.getEntry1value());
 							wire.setDone(true);
 							// Affectation
 							circuit.getSolver7wire()[i] = wire;
-						} 
-						
-					} // if (!wire.getDone())
+						} // wire.getEntry1Done
 					break ;
-				}
-			}
-		}
+				}     // end case 0
+				case 1 : {
+					// bitwise NOT opers on signed ...
+					long lg = wire.getEntry1value() ;
+					
+					wire.setWirevalue( (int) (~lg & 0xffff )  );
+					wire.setDone(true);
+					// Affectation
+					circuit.getSolver7wire()[i] = wire;
+										break ;
+					}    // case 1 ( NOT )
+				case 2 : {
+					// binary operator
+						if ( wire.getEntry2Done() == true){
+							// 2 operandes Ok
+							System.out.println( " circuit " + i + " " + circuit.getSolver7wire().toString()) ;
+							int e1 = wire.getEntry1value();
+							int e2 = wire.getEntry2value();
+							
+							switch (wire.getOperation()) {
+							
+							case "AND" : {
+								wire.setWirevalue( e1 & e2 ) ;
+								break ;
+								} //end AND
+							case "OR" : {
+								wire.setWirevalue( e1 | e2 ) ;
+								break ;
+								} //end OR
+							case "LSHIFT" : {
+								wire.setWirevalue( e1 << e2 ) ;
+								break ;
+								} // LSHIFT ;
+							case "RSHIFT" : {
+								wire.setWirevalue( e1 >>> e2 ) ;
+								break ;
+								} // LSHIFT ;
+
+							} // switch getOperation
+							wire.setDone(true);
+							// Affectation
+							circuit.getSolver7wire()[i] = wire;
+
+						}     // wire.getEntry2Done() == true
+							break ;
+					}    // binary operator
+
+				}        // switch
+			}            // !wire.getDone
+		}                // for ( int i =0 
 		return circuit ;
-	}
+	}  // end solve
 } // end class Solver7
