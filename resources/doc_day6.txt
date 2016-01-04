@@ -1,0 +1,35 @@
+extreme.sud
+***** load *******
+******* vue.load ******
+******* vue.load AdventProject6.txt******
+###############################################
+Tentative de resolution de la matrice suivante
+###############################################
+Tentative de resolution du projet : 6
+Chargement pb 6
+ value6 solver 6 
+ end read 
+Counts on at 
+Solution Solver6 solver 6 400410
+
+
+
+part 2 
+extreme.sud
+***** load *******
+******* vue.load ******
+******* vue.load AdventProject6.txt******
+###############################################
+Tentative de resolution de la matrice suivante
+###############################################
+Tentative de resolution du projet : 6
+Chargement pb 6
+ value6 solver 6 
+ end read 
+Counts on at 
+Solution Solver6 solver 6 10577888
+nt of CodeJean-Francois Alleton 11*
+
+    [About][Stats][Leaderboard][Settings][Log out]
+
+That's not the right answer; your answer is too low. If you're stuck, there are some general tips on the about page, or you can ask for hints on the subreddit. Please wait one minute before trying again. (You guessed 10577888.) [Return to Day 6]
