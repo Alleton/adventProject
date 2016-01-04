@@ -2,28 +2,14 @@ package com.alleton.adventProject.service;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
 
 import com.alleton.adventProject.model.*;
 
 public class Solver7 {
-	public String solver7 (String sfname){
 
-	int linenumber =  0 ;
+	public String solver7 (String sfname){
 	
-	String line ;
 	
-	String instruction  ;
-	int startx ;
-	int starty ;
-	int endx ;
-	int endy ;
-	
-	String[] tokens ;
-	String[] coordinates;
-	String delimspace = "[ ]+";   // maybe some double space ??
-	String delimcoma = "[,]";
 	Solver7circuit solver7circuit ;
 	
 	
@@ -31,10 +17,14 @@ public class Solver7 {
 	try {
 		//Solver7circuit 
 		solver7circuit =  parselines(sfname) ;
-		// this should initialyse values
-		//System.out.println( )
-		System.out.println ("solver7circuit.toString()");
+		// this should initialyse values ==> affichage console
 		System.out.println (solver7circuit.toString());
+		
+		// try to solve
+		solver7circuit = solve (solver7circuit) ;
+		System.out.println (solver7circuit.toString());
+		
+		
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 	
@@ -50,15 +40,15 @@ public class Solver7 {
 	
 	/**
 	 * parse 
+	 * affecte les valeurs initiales de  input au circuit
 	 */
 	public static Solver7circuit parselines( String sfname) {
 		
 		Solver7circuit solver7circuit = new Solver7circuit();
 		
-		String splitBy = " ";  
 		String line = "";
 		int linenumber = 0;
-		Scanner scanner = null;
+		
 		
 		//Solver7wire wire = new Solver7wire () ;
 		
@@ -73,31 +63,84 @@ public class Solver7 {
 			/* lecture deuxieme ligne  */
 			while ((line = reader.readLine()) != null) {
 				Solver7wire wire = new Solver7wire () ;
-				System.out.println( line ) ;
+				//System.out.println( line ) ;
 			
-				scanner = new Scanner(line);
-				scanner.useDelimiter(splitBy);
-				String first = scanner.next();
+				//System.out.println( "nb mots " + line.trim().split("\\s+").length  );
+				int nbparts = line.trim().split("\\s+").length ;
+				String[] parts =line.split(" ");
 				
-				if ( isNumeric(first)) {
-					wire.setEntryvalue(Integer.parseInt(first));
-				}else{
-				
-					wire.setEntry1(first);
+				switch (nbparts)
+				{
+				case 3: {
+					//System.out.println("3 valeurs  " + parts[0] + ":" + parts[1] + ":" + parts[2] ) ;
+					//System.out.println("Affectation simple");
+					wire.setNboper(0); // affectation
+					if ( isNumeric(parts[0])) {
+						// valeur numerique ==> entry1 value
+						wire.setEntry1value(Integer.parseInt(parts[0]));
+						wire.setEntry1Done(true);
+						// et on affecte le resultat !!
+						wire.setWirevalue(Integer.parseInt(parts[0]));
+						wire.setDone(true);
+					} else {
+						// avec3 composant simple ..
+						wire.setEntry1( parts[0]);
+					}
+					// le dernier est le wirename
+					wire.setWirename( parts[2]);
+					break;		
+					}
+				case 4: {
+					//System.out.println("4 valeurs  " + parts[0] + ":" + parts[1] +":"+ parts[2] + ":" + parts[3] ) ; 
+					//System.out.println("Operateur unaire");
+					wire.setNboper(1); // unaire
+					if ( parts[0].equals("NOT") ) {
+						//  seul operateur unaire 
+						wire.setOperation( parts[0]);
+						wire.setEntry1(parts[1]);
+						wire.setWirename(parts[3]);
+					} else {
+						// avec3 compoasnt simple ..
+						System.out.println("*** Erreur Operateur unaire");
+					}
+					break;		
+					}
+				case 5: {
+					//System.out.println("5 valeurs  " + parts[0] + ":" + parts[1] +":"+ parts[2] + ":" + parts[3]+ ":" + parts[4] ) ; 
+					//System.out.println("Operateur binaire");
+					wire.setNboper(2); // binaire
+					if ( isNumeric(parts[0])) {
+						// valeur numerique ==> entry1 value
+						wire.setEntry1value(Integer.parseInt(parts[0]));
+						wire.setEntry1Done(true);
+					} else {
+						// 
+						wire.setEntry1( parts[0]);
+					}
+					// la deuxieme partie est l operation
+					wire.setOperation(parts[1]);
+					// pour le deuxieme argment verification umerique
+					
+					if ( isNumeric(parts[2])) {
+						// valeur numerique ==> entry1 value
+						wire.setEntry2value(Integer.parseInt(parts[2]));
+						wire.setEntry2Done(true);
+					} else {
+						// 
+						wire.setEntry2( parts[2]);
+					}
+					// le dernier est le wirename
+					wire.setWirename( parts[4]);
+					break;		
+					}
 				}
-				scanner.close();
 				
-				System.out.println( first ) ;
-				
-				
+				// Affectation
 				solver7circuit.getSolver7wire()[linenumber] = wire;
 				
 				linenumber ++ ;
 			} // while lecture ligne
 			
-			//matrix.getCells()[rowIndex][colIndex] = cell;
-			
-
 			reader.close();
 			filereader.close();
 
@@ -107,12 +150,77 @@ public class Solver7 {
 			//e.printStackTrace();
 		}
 		return solver7circuit ;
-		
-	}
+	} // end parselines
 	
 	private   static boolean isNumeric(String str)
 	  {
 		return str.matches("\\d+");
 	  }
 	
+	/**
+	 * le solveur lui mm
+	 * @param circuit
+	 * @return
+	 */
+	private Solver7circuit  solve (Solver7circuit circuit_in) {
+		Solver7circuit circuit = circuit_in;
+		int nbok = 0;
+		// first affectations
+		for ( int i =0 ; i< circuit.getCircuitSize() ; i++) {
+			// System.out.println( " circuit " + i + " " + circuit.getSolver7wire().toString()) ;
+			Solver7wire wire = circuit.getSolver7wire()[i] ;
+			//System.out.println( " wire  " + i + " " + wire.getWirename()+ " " +" nombre operateurs " + " " + wire.getNboper()) ;
+			if (wire.getDone()) {
+				nbok = nbok + 1 ;    // compte bon
+			} else
+			{
+				// sinon essayons d'affecter les valeurs d'entree
+				// premiere valeur
+				if (!wire.getEntry1Done()) {
+					// 
+					// boucle pour chercher le wire entree1
+					for ( int j = 0 ; j < circuit.getCircuitSize() ; j ++) {
+						//System.out.println("cherche " + wire.getEntry1()  + " = " + circuit.getSolver7wire()[j].getWirename() );
+						if ( circuit.getSolver7wire()[j].getWirename().equals(wire.getEntry1() ) &&
+								circuit.getSolver7wire()[j].getDone()	) {
+							// nous avons trouve la source
+							/* System.out.println(  wire.getWirename()+
+									             " " + circuit.getSolver7wire()[j].getWirename() +
+									             " " + circuit.getSolver7wire()[j].getDone() );
+									             */
+							wire.setEntry1value(circuit.getSolver7wire()[j].getWirevalue());
+							wire.setEntry1Done(true);
+							circuit.getSolver7wire()[i] = wire;
+							break ;
+						}
+					}
+				}
+			}
+			
+		}
+		
+		for ( int i =0 ; i< circuit.getCircuitSize() ; i++) {
+			// System.out.println( " circuit " + i + " " + circuit.getSolver7wire().toString()) ;
+			Solver7wire wire = circuit.getSolver7wire()[i] ;
+			//System.out.println( " wire  " + i + " " + wire.getWirename()+ " " +" nombre operateurs " + " " + wire.getNboper()) ;
+		
+			switch (wire.getNboper()) {
+				case 0: {
+					// si deja affecte rien
+					if (!wire.getDone()) {
+					// si nous avons une valeur numerique ==> affecter
+						if (wire.getEntry1Done()) {
+							wire.setWirevalue(wire.getEntry1value());
+							wire.setDone(true);
+							// Affectation
+							circuit.getSolver7wire()[i] = wire;
+						} 
+						
+					} // if (!wire.getDone())
+					break ;
+				}
+			}
+		}
+		return circuit ;
+	}
 } // end class Solver7
