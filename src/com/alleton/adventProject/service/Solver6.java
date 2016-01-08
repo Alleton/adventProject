@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-
-
 public class Solver6 {
 	int max = 999 ; 
 	int lampeon = 1 ;  
@@ -106,11 +104,7 @@ public class Solver6 {
 	try {
 		FileReader filereader = new FileReader(sfname);
 		BufferedReader reader = new BufferedReader(filereader);
-		/* relecture premiere ligne  */
-		line = reader.readLine();
-		
-		
-		/* lecture deuxieme ligne  */
+		/* lecture  lignes  */
 		while ((line = reader.readLine()) != null) {
 			linenumber ++ ;
 			// parse line
@@ -173,18 +167,13 @@ public class Solver6 {
 		filereader.close();
 		
 	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		
 		throw new IllegalArgumentException("Unable to load " + sfname, e);
 		//e.printStackTrace();
 	}
-	// resultat = countlights() ; 
+
+ 
 	return "solver 6 " + countlights() ; 
 	
-	/*
-	 * turn off lights 
-	 */
-
 	} // end constructor with sfname
 
 } // end class

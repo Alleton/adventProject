@@ -18,6 +18,7 @@ public class Solver7 {
 		//Solver7circuit 
 		solver7circuit =  parselines(sfname) ;
 		// this should initialyse values ==> affichage console
+		System.out.println ( "sfname = " + sfname ) ;
 		System.out.println (solver7circuit.toString());
 		
 		// try to solve
@@ -43,7 +44,7 @@ public class Solver7 {
 	 * affecte les valeurs initiales de  input au circuit
 	 */
 	public static Solver7circuit parselines( String sfname) {
-		
+		System.out.println("parselines filename = " + sfname );
 		Solver7circuit solver7circuit = new Solver7circuit();
 		
 		String line = "";
@@ -55,13 +56,11 @@ public class Solver7 {
 		try {
 			FileReader filereader = new FileReader(sfname);
 			BufferedReader reader = new BufferedReader(filereader);
-
-			/* relecture premiere ligne  */
-			line = reader.readLine();
 			
 			
 			/* lecture deuxieme ligne  */
 			while ((line = reader.readLine()) != null) {
+				System.out.println("parselines line " + line );
 				Solver7wire wire = new Solver7wire () ;
 				//System.out.println( line ) ;
 			
@@ -186,6 +185,7 @@ public class Solver7 {
 							wire.setEntry1value(circuit.getSolver7wire()[j].getWirevalue());
 							wire.setEntry1Done(true);
 							circuit.getSolver7wire()[i] = wire;
+							nbok = nbok + 1 ;    // compte bon
 							break ;
 						} // entry name found and OK
 					} // for j
@@ -256,18 +256,26 @@ public class Solver7 {
 							
 							case "AND" : {
 								wire.setWirevalue( e1 & e2 ) ;
+								wire.setDone(true);
+								nbok = nbok + 1 ;    // compte bon
 								break ;
 								} //end AND
 							case "OR" : {
 								wire.setWirevalue( e1 | e2 ) ;
+								wire.setDone(true);
+								nbok = nbok + 1 ;    // compte bon
 								break ;
 								} //end OR
 							case "LSHIFT" : {
 								wire.setWirevalue( e1 << e2 ) ;
+								wire.setDone(true);
+								nbok = nbok + 1 ;    // compte bon
 								break ;
 								} // LSHIFT ;
 							case "RSHIFT" : {
 								wire.setWirevalue( e1 >>> e2 ) ;
+								wire.setDone(true);
+								nbok = nbok + 1 ;    // compte bon
 								break ;
 								} // LSHIFT ;
 
@@ -283,6 +291,11 @@ public class Solver7 {
 				}        // switch
 			}            // !wire.getDone
 		}                // for ( int i =0 
+		if  ( (nbok < circuit.getCircuitSize())){
+			// let's sart another turn
+			 circuit = solve ( circuit) ;
+		}
+		
 		return circuit ;
 	}  // end solve
 } // end class Solver7

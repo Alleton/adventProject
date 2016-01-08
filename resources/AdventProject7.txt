@@ -1,4 +1,3 @@
-#7#
 lf AND lq -> ls
 iu RSHIFT 1 -> jn
 bo OR bu -> bv
