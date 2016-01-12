@@ -5,9 +5,9 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Solver10 {
-	String solution = "";
+	StringBuffer  solution = new StringBuffer("");
 	
-	public String solver10 (String sfname){
+	public StringBuffer solver10 (String sfname){
 		//String res = "";
 		String line ;
 		// int iteration ;
@@ -23,16 +23,16 @@ public class Solver10 {
 				 System.out.println(" line " + line );	 
 				 analyse (  line );
 		
-		 		 for ( int  iteration = 1 ; iteration < 40; iteration ++) {
+		 		 for ( int  iteration = 1 ; iteration < 50; iteration ++) {
 		
-		 			line = solution ;
-					 solution = "";
-					 System.out.println(" iteration " + ( iteration ) + " ligne = " + line + "  sol = " +   solution );	 
+		 			line = solution.toString() ;
+					 solution.setLength(0);;
+					 System.out.println(" iteration " + ( iteration ) );	 
 					 analyse (  line );
-					 // System.out.println(" line " + line );	 
+					 System.out.println(" length line " + line.length() );	 
 				 }
 				 
-				 System.out.println(" solution " + solution );	 
+				 //System.out.println(" solution " + solution );	 
 				 
 			 }
 	
@@ -63,7 +63,9 @@ public class Solver10 {
 		 // serai-ce le dernier character ??
 		 if (line.length() == 1) {
 			 //System.out.println( "begore line.length() == 1: " + solution ) ;
-			 solution = solution + "1" + c ;
+			 //solution = solution + "1" + c ;
+			 solution.append('1');
+			 solution.append(c);
 			 //System.out.println( "after line.length() == 1: " + solution ) ;
 			 //return line;
 		 }else {
@@ -80,9 +82,11 @@ public class Solver10 {
 					 }
 					 // System.out.println( " on finit par c dans la boucle .. il faut ajouter le nb char " +  i + " :" + c ) ;
 					 // System.out.println( " on finit par c dans la boucle si fini seulement"  ) ;
-					 if (line.length() ==  i  ) {
+					 if (linelength ==  i  ) {
 						// System.out.println( "before : " + solution ) ;
-						 solution = solution + i + c ;
+						 //solution = solution + i + c ;
+						 solution.append(i);
+						 solution.append(c);
 						//  System.out.println( "after  : " + solution ) ;
 					 } else {
 						 // System.out.println( "on finit par c dans la boucle rien : " + solution ) ;
@@ -92,17 +96,21 @@ public class Solver10 {
 					 
 				 
 				 } else {
-					 if (line.length() ==  i- 1 ) {
+					 if (linelength ==  i- 1 ) {
 						 // fin de ligne
 						 // System.out.println( " on finit par c .. il faut ajouter le nb char " +  i + " :" + c ) ;
-						 solution = solution + i + c ;
+						 //solution = solution + i + c ;
+						 solution.append(i);
+						 solution.append(c);
 						 i ++ ;
 						 // System.out.println( "Fin de ligne .. done " + solution ) ;
 						 return ;
 					 } else {
 						 // ben c est pas fini
 						 // System.out.println( "before pas fini : " + solution ) ;
-						 solution = solution + i + c ;
+						 //solution = solution + i + c ;
+						 solution.append(i);
+						 solution.append(c);
 						 //System.out.println( "after  pas fini : " + solution ) ;
 						 //i ++ ;
 						 if  ( !line.substring(i, linelength).equals("") )  {
@@ -132,7 +140,9 @@ public class Solver10 {
 					 
 		 } // end (line.length() == 1)
 		} // end (line.length() == 0)
-		 System.out.println( " return analyse solution = " + solution  ) ; 
+		 // System.out.println( " return analyse solution = " + solution  ) ;
+		 System.out.println( " return analyse solution = " + solution.length()  ) ;
+		 
 		 return ;
 	} // analyse
 
