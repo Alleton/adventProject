@@ -25,14 +25,9 @@ public class Solver3 {
 		
 		
 		char c ;
-		System.out.println(" value3 solver 3 "   ) ;
 		try {
 			FileReader filereader = new FileReader(sfname);
 			BufferedReader reader = new BufferedReader(filereader);
-			/* relecture premiere ligne  */
-			line = reader.readLine();
-			
-			
 			/* lecture deuxieme ligne  */
 			while ((line = reader.readLine()) != null) {
 				for ( int i = 0 ; i< line.length();i ++ ) {
@@ -101,7 +96,6 @@ public class Solver3 {
 				array [xr][yr] = 1 ;
 				//BufferedReader reader2 = new BufferedReader(filereader);
 				BufferedReader reader2 = new BufferedReader(new FileReader(sfname));
-				line = reader2.readLine();
 				line = reader2.readLine();
 				
 				for ( int i = 0 ; i< line.length();i ++ ){
@@ -180,7 +174,6 @@ public class Solver3 {
 			
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			
 			throw new IllegalArgumentException("Unable to load " + sfname, e);
 			//e.printStackTrace();

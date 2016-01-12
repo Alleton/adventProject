@@ -6,8 +6,9 @@ import java.io.IOException;
 
 public class Solver10 {
 	StringBuffer  solution = new StringBuffer("");
+	int linel = 0;
 	
-	public StringBuffer solver10 (String sfname){
+	public String solver10 (String sfname){
 		//String res = "";
 		String line ;
 		// int iteration ;
@@ -26,10 +27,12 @@ public class Solver10 {
 		 		 for ( int  iteration = 1 ; iteration < 50; iteration ++) {
 		
 		 			line = solution.toString() ;
-					 solution.setLength(0);;
+					 solution.setLength(0);
+					 System.gc(); 
 					 System.out.println(" iteration " + ( iteration ) );	 
 					 analyse (  line );
 					 System.out.println(" length line " + line.length() );	 
+					 linel = line.length() ;
 				 }
 				 
 				 //System.out.println(" solution " + solution );	 
@@ -43,7 +46,7 @@ public class Solver10 {
 		//e.printStackTrace();
 	}
 		
-		return solution ;
+		return String.valueOf(linel) ;
 	} // 
 	
 	private void  analyse ( String line ) {
