@@ -39,3 +39,61 @@ y: 456
 
 In little Bobby's kit's instructions booklet (provided as your puzzle input), what signal is ultimately provided to wire a?
 
+String texte =  "Quand le ciel bas et lourd" ;  // texte à tester    
+ boolean b = Pattern.matches("a.*", texte) ;
+ 
+ 
+ ublic static int wordCounter() throws FileNotFoundException { 
+//inputs the text file
+Scanner input = new Scanner(new File("words.txt")); 
+    int countWords = 0;
+    //while there are more lines
+    while (input.hasNextLine()) {
+        //goes to each next word
+        String word = input.next();
+        //counts each word
+        countWords++;
+    }
+    return countWords;
+}
+
+
+s.trim().split("\\s+").length
+
+			
+				scanner = new Scanner(line);
+				scanner.useDelimiter(splitBy);
+				String first = scanner.next();
+				
+				if ( isNumeric(first)) {
+					// valeur numerique ==> entry1 value
+					wire.setEntry1value(Integer.parseInt(first));
+					//
+				}else{
+					// Majuscule ==> operation
+					
+					if (Pattern.matches("[A-Z]*", first) ) {
+						// en majuscule OPERATION
+						System.out.println ("majuscule " + first ) ;
+						wire.setOperation(first);
+					} else {
+					
+					wire.setEntry1(first);
+					}
+				}
+				scanner.close();
+				
+				System.out.println( first ) ;
+				
+	
+	// 0 pour affectation , 1 pour unaire , 2 binaire 
+	
+	System.out.println( " lg " + lg) ;
+					System.out.println( " ~lg " + ~lg) ;
+					System.out.println( " ~lg & 0xffffffff " + ( ~lg & 0xffffffff ) ) ;
+					System.out.println( " ~lg & 0xffff " + ( ~lg & 0xffff ) ) ;
+					
+					
+&& wire.getEntry1Done()
+(78) a  = lx  : 2797  : true  : null  : 0  : false  : null  : 0  : true  : 2797  : 
+					

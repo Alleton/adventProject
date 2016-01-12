@@ -2,7 +2,7 @@ package com.alleton.adventProject.model;
 
 public class Solver7circuit {
 	private Solver7wire[] solver7wires ;
-	private int circuitsize = 8 ;
+	private int circuitsize = 339 ;
 	
 	public Solver7circuit () {
 		solver7wires = new Solver7wire [circuitsize] ;
@@ -36,29 +36,29 @@ public class Solver7circuit {
 	 */
 	
 	public String circuitToString() {
-		String line = "";
+		//String line = "";
 		
 		StringBuilder builder = new StringBuilder();
 		builder.append("\r\n");	
 		for (int i = 0; i < this.getCircuitSize(); i++) {
-			builder.append(" (" + i +")");
+			builder.append(" (" + i +") ");
 				
 			// builder.append("\r\n");		
 		
 			Solver7wire wire = this.solver7wires[i] ;
-			//System.out.println ("" + wire.getEntry1()) ;
 			
-			line = wire.getEntry1() + "  : " ;
 			//System.out.println( line ) ;
-			builder.append( wire.getEntry1() + "  : " ) ; 
-			
-			line = wire.getEntry2() + "  : " ;
-			//System.out.println( line ) ;
-			builder.append( wire.getEntry2() + "  : " ) ; 
-			
-			builder.append( wire.getEntryvalue() + "  : " ) ;
-			builder.append( wire.getOperation()  + "  : " ) ;
-			builder.append( wire.getWirename()   + "  : " ) ;
+			builder.append( wire.getWirename()    + "  = " ) ;
+			builder.append( wire.getEntry1()      + "  : " ) ; 
+			builder.append( wire.getEntry1value() + "  : " ) ;
+			builder.append( wire.getEntry1Done()  + "  : " ) ;
+			builder.append( wire.getEntry2()      + "  : " ) ; 
+			builder.append( wire.getEntry2value() + "  : " ) ;
+			builder.append( wire.getEntry2Done()  + "  : " ) ;
+			builder.append( wire.getOperation()   + "  : " ) ;
+			builder.append( wire.getNboper ()     + "  : " ) ;
+			builder.append ( wire.getDone()       + "  : " ) ;
+			builder.append( wire.getWirevalue()   + "  : " ) ;
 			
 			builder.append("\r\n");
 		}

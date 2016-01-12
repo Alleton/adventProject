@@ -17,9 +17,7 @@ public class Solver4 {
 		try {
 			FileReader filereader = new FileReader(sfname);
 			BufferedReader reader = new BufferedReader(filereader);
-			/* relecture premiere ligne  */
-			line = reader.readLine();
-			/* relecture premiere ligne  */
+			/* lecture premiere ligne  */
 			line = reader.readLine();
 			
 			// let's go

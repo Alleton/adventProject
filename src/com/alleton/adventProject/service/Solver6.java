@@ -68,12 +68,6 @@ public class Solver6 {
 			System.out.println( "Counts on at " ) ;
 			for ( int i = 0 ; i <= max; i ++) {
 				for ( int j = 0 ; j <= max ; j ++) {
-					//System.out.println(  grid [i][j] + "Counts on at " + i + " " +  j ) ;
-					/*if ( grid [i][j] == lampeon ) {
-						total ++ ;
-						//System.out.println( "on at " + i + " " +  j ) ;
-					}
-					*/
 					// Part 2 total brigthneess
 					total = total + grid [i][j] ;
 				}

@@ -1,11 +1,11 @@
 package com.alleton.adventProject.service;
-import com.alleton.adventProject.model.AdventModel;
+//import com.alleton.adventProject.model.AdventModel;
 
 public class Solver {
 
 	
 	public Solver ( int problem , String sfname) {
-		AdventModel adventmodel = new AdventModel ();
+		//AdventModel adventmodel = new AdventModel ();
 		
 		try {
 			System.out.println("");
@@ -76,8 +76,32 @@ public class Solver {
 			
 			break;		
 			}
+		case 9: {
+			System.out.println("Chargement pb " + problem ) ; 
+			Solver9 Solver9 = new Solver9();
+			//
+			System.out.println("Solution Solver9 " + Solver9.solver9(sfname));
+			
+			break;		
+			}
 
-		//case 12: <action12>; break;
+		case 10: {
+			System.out.println("Chargement pb " + problem ) ; 
+			Solver10 Solver10 = new Solver10();
+			//
+			System.out.println("Solution Solver10 " + Solver10.solver10(sfname));
+			
+			break;		
+			}
+		case 11: {
+			System.out.println("Chargement pb " + problem ) ; 
+			// Solver8 Solver8 = new Solver8();
+			//
+			//System.out.println("Solution Solver8 " + Solver8.solver8(sfname));
+			
+			break;		
+			}
+
 		default:
 			System.out.println("Pas de tentative de resolution du projet : " + problem ) ;
 		}

@@ -10,7 +10,7 @@ package com.alleton.adventProject.controller;
 
 	   public SimpleFileChooser() {
 	    super("File Chooser Test Frame");
-	    setSize(350, 200);
+	    setSize(550, 500);
 	    setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 	    Container c = getContentPane();

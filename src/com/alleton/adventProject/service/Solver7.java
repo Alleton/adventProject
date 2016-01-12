@@ -27,12 +27,10 @@ public class Solver7 {
 		
 		
 	} catch (Exception e) {
-		// TODO Auto-generated catch block
 	
 		//throw new IllegalArgumentException("Unable to load " + sfname, e);
 		e.printStackTrace();
 	}
-	// resultat = countlights() ; 
 	
 	
 	return "solver 76 "  ; 		
@@ -139,7 +137,7 @@ public class Solver7 {
 				
 				linenumber ++ ;
 			} // while lecture ligne
-			
+			solver7circuit.setCircuitSize(linenumber);
 			reader.close();
 			filereader.close();
 
@@ -155,6 +153,7 @@ public class Solver7 {
 	  {
 		return str.matches("\\d+");
 	  }
+	
 	
 	/**
 	 * le solveur lui mm

@@ -1,4 +1,3 @@
-#6#
 turn on 240,129 through 703,297
 turn off 240,129 through 240,129
 toggle 240,129 through 240,131

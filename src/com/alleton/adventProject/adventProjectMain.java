@@ -3,6 +3,7 @@
  */
 package com.alleton.adventProject;
 
+
 import com.alleton.adventProject.model.*;
 import com.alleton.adventProject.controller.*;
 import com.alleton.adventProject.view.*;
@@ -14,28 +15,33 @@ import com.alleton.adventProject.view.*;
  *
  */
 public class adventProjectMain {
+	int problem ;
 
 	/**
 	 * @param args
 	 */
+	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		final int DAY_GRID = 5;
 		
-		AdventGetPropertyValues properties = new AdventGetPropertyValues();		
-		System.out.println (properties.getPropValue("AdventFile"));
-
-//		String AdventFile = properties.getPropValue("AdventFile") ;
-//		String AdventFolder = properties.getPropValue("AdventFolder") ;
-//		System.out.println (properties.getPropValue("AdventFolder"));
-		
+		/* **************** */
+		/* MVC              */
 		/* **************** */
 		AdventModel adventmodel = new  AdventModel();
 		AdventProjectView adventprojectview = new AdventProjectView (adventmodel);
 		AdventProjectController adventprojectcontroller = new AdventProjectController(adventmodel,adventprojectview );
 		
-		//addActionListener
-		adventprojectview.letsgo.addActionListener(adventprojectcontroller);
-		adventprojectview.load.addActionListener(adventprojectcontroller);
+		//addActionListener pour les boutons
+		adventprojectview.test.addActionListener(adventprojectcontroller);
+		adventprojectview.Go.addActionListener(adventprojectcontroller);
+		
+		// ajout 25  boutons listener
+		for(int colIndex=0; colIndex < DAY_GRID; colIndex++){
+			for(int rowIndex=0; rowIndex < DAY_GRID; rowIndex++) {
+				adventprojectview.allButton[colIndex][rowIndex].addActionListener(adventprojectcontroller);
+				
+			}
+		}
 		
 	}
 

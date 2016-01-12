@@ -1,0 +1,94 @@
+﻿ probleme  9
+******* vue.load ******
+Solve resources/AdventProject9.txt
+
+Tentative de resolution du projet : 9
+Chargement pb 9
+parselines filename = resources/AdventProject9.txt
+Solution Solver9 
+sfname = resources/AdventProject9.txt
+
+ (0) Faerun  = Tristram  : 65  : 
+ (1) Faerun  = Tambi  : 129  : 
+ (2) Faerun  = Norrath  : 144  : 
+ (3) Faerun  = Snowdin  : 71  : 
+ (4) Faerun  = Straylight  : 137  : 
+ (5) Faerun  = AlphaCentauri  : 3  : 
+ (6) Faerun  = Arbre  : 149  : 
+ (7) Tristram  = Tambi  : 63  : 
+ (8) Tristram  = Norrath  : 4  : 
+ (9) Tristram  = Snowdin  : 105  : 
+ (10) Tristram  = Straylight  : 125  : 
+ (11) Tristram  = AlphaCentauri  : 55  : 
+ (12) Tristram  = Arbre  : 14  : 
+ (13) Tambi  = Norrath  : 68  : 
+ (14) Tambi  = Snowdin  : 52  : 
+ (15) Tambi  = Straylight  : 65  : 
+ (16) Tambi  = AlphaCentauri  : 22  : 
+ (17) Tambi  = Arbre  : 143  : 
+ (18) Norrath  = Snowdin  : 8  : 
+ (19) Norrath  = Straylight  : 23  : 
+ (20) Norrath  = AlphaCentauri  : 136  : 
+ (21) Norrath  = Arbre  : 115  : 
+ (22) Snowdin  = Straylight  : 101  : 
+ (23) Snowdin  = AlphaCentauri  : 84  : 
+ (24) Snowdin  = Arbre  : 96  : 
+ (25) Straylight  = AlphaCentauri  : 107  : 
+ (26) Straylight  = Arbre  : 14  : 
+ (27) AlphaCentauri  = Arbre  : 46  : 
+Vector Towns[Faerun, Tristram, Tambi, Norrath, Snowdin, Straylight, AlphaCentauri, Arbre]
+Trajet  Towns0
+
+et alors 
+[Faerun, Tristram, Tambi, Norrath, Snowdin, Straylight, AlphaCentauri, Arbre] ==> 458
+  solution  458
+[Faerun, Tristram, Tambi, Norrath, Snowdin, Straylight, AlphaCentauri, Arbre] ==> 458
+  solution  maxi 458
+[Faerun, Tristram, Tambi, Norrath, Snowdin, Straylight, Arbre, AlphaCentauri] ==> 365
+  solution  365
+[Faerun, Tristram, Tambi, Norrath, Snowdin, AlphaCentauri, Arbre, Straylight] ==> 348
+  solution  348
+[Faerun, Tristram, Tambi, Norrath, Straylight, Snowdin, Arbre, AlphaCentauri] ==> 462
+  solution  maxi 462
+[Faerun, Tristram, Tambi, Norrath, Straylight, AlphaCentauri, Snowdin, Arbre] ==> 506
+  solution  maxi 506
+[Faerun, Tristram, Tambi, Norrath, AlphaCentauri, Straylight, Snowdin, Arbre] ==> 636
+  solution  maxi 636
+[Faerun, Tristram, Tambi, Snowdin, Norrath, Straylight, Arbre, AlphaCentauri] ==> 271
+  solution  271
+[Faerun, Tristram, Tambi, Snowdin, Straylight, AlphaCentauri, Norrath, Arbre] ==> 639
+  solution  maxi 639
+[Faerun, Tristram, Tambi, Straylight, Snowdin, Arbre, Norrath, AlphaCentauri] ==> 641
+  solution  maxi 641
+[Faerun, Tristram, Tambi, Straylight, AlphaCentauri, Norrath, Arbre, Snowdin] ==> 647
+  solution  maxi 647
+[Faerun, Tristram, Tambi, AlphaCentauri, Arbre, Straylight, Norrath, Snowdin] ==> 241
+  solution  241
+[Faerun, Tristram, Tambi, Arbre, Snowdin, Straylight, AlphaCentauri, Norrath] ==> 711
+  solution  maxi 711
+[Faerun, Tristram, Tambi, Arbre, Norrath, AlphaCentauri, Straylight, Snowdin] ==> 730
+  solution  maxi 730
+[Faerun, Tristram, Norrath, Snowdin, Tambi, AlphaCentauri, Arbre, Straylight] ==> 211
+  solution  211
+[Faerun, Tristram, Snowdin, Straylight, AlphaCentauri, Norrath, Arbre, Tambi] ==> 772
+  solution  maxi 772
+[Faerun, Tristram, Arbre, Straylight, Norrath, Snowdin, Tambi, AlphaCentauri] ==> 198
+  solution  198
+[Faerun, Tambi, Arbre, Norrath, AlphaCentauri, Straylight, Snowdin, Tristram] ==> 836
+  solution  maxi 836
+[Faerun, Tambi, Arbre, Norrath, AlphaCentauri, Straylight, Tristram, Snowdin] ==> 860
+  solution  maxi 860
+[Faerun, AlphaCentauri, Tambi, Snowdin, Norrath, Straylight, Arbre, Tristram] ==> 136
+  solution  136
+[Faerun, AlphaCentauri, Tambi, Snowdin, Norrath, Tristram, Arbre, Straylight] ==> 117
+  solution  117
+[Tristram, Snowdin, Straylight, Faerun, Tambi, Arbre, Norrath, AlphaCentauri] ==> 866
+  solution  maxi 866
+[Tristram, Snowdin, Straylight, AlphaCentauri, Norrath, Faerun, Arbre, Tambi] ==> 885
+  solution  maxi 885
+[Tambi, Arbre, Faerun, Norrath, AlphaCentauri, Straylight, Tristram, Snowdin] ==> 909
+  solution  maxi 909
+solution mini === 117
+solution maxi === 909
+solver9circuitdone  0
+Solution Solver9 solver9 

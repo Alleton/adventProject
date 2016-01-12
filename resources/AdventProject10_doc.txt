@@ -1,0 +1,8 @@
+
+
+String abc = "abc";
+List<Character> charList = new ArrayList<Character>();
+
+for (char c : abc.toCharArray()) {
+  charList.add(c);
+}

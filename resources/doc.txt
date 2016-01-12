@@ -325,8 +325,261 @@ y: 456
 
 In little Bobby's kit's instructions booklet (provided as your puzzle input), what signal is ultimately provided to wire a?
 
+In little Bobby's kit's instructions booklet (provided as your puzzle input), what signal is ultimately provided to wire a?
+
+Your puzzle answer was 16076.
+
+The first half of this puzzle is complete! It provides one gold star: *
+- Part Two ---
+
+Now, take the signal you got on wire a, override wire b to that signal, and reset the other wires (including wire a). What new signal is ultimately provided to wire a?
+
+Although it hasn't changed, you can still get your puzzle input.
+
+(78) a  = lx  : 2797  : true  : null  : 0  : false  : null  : 0  : true  : 2797  : 
+
+
+Advent of CodeJean-Francois Alleton 14*
+
+    [About][Stats][Leaderboard][Settings][Log out]
+
+That's the right answer! You are one gold star closer to powering the weather machine. You have completed Day 7! You can [Shareon Twitter Google+ Reddit] this victory or [Return to your advent calendar].
 
 
 
+Advent of CodeJean-Francois Alleton 14*
+
+    [About][Stats][Leaderboard][Settings][Log out]
+
+--- Day 8: Matchsticks ---
+
+Space on the sleigh is limited this year, and so Santa will be bringing his list as a digital copy. He needs to know how much space it will take up when stored.
+
+It is common in many programming languages to provide a way to escape special characters in strings. For example, C, JavaScript, Perl, Python, and even PHP handle special characters in very similar ways.
+
+However, it is important to realize the difference between the number of characters in the code representation of the string literal and the number of characters in the in-memory string itself.
+
+For example:
+
+    "" is 2 characters of code (the two double quotes), but the string contains zero characters.
+    "abc" is 5 characters of code, but 3 characters in the string data.
+    "aaa\"aaa" is 10 characters of code, but the string itself contains six "a" characters and a single, escaped quote character, for a total of 7 characters in the string data.
+    "\x27" is 6 characters of code, but the string itself contains just one - an apostrophe ('), escaped using hexadecimal notation.
+
+Santa's list is a file that contains many double-quoted string literals, one on each line. The only escape sequences used are 
+	\\ (which represents a single backslash), 
+	\" (which represents a lone double-quote character), and 
+	\x plus two hexadecimal characters (which represents a single character with that ASCII code).
+
+Disregarding the whitespace in the file, what is the number of characters of code for string literals minus the number of characters in memory for the values of the strings in total for the entire file?
+
+For example, given the four strings above, the total number of characters of string code (2 + 5 + 10 + 6 = 23) minus the total number of characters in memory for string values (0 + 3 + 7 + 1 = 11) is 23 - 11 = 12.
+
+To begin, get your puzzle input.
+
+resultat 1070
+Solution Solver8 solver 8 
 
 
+Is not the right answer; your answer is too low. If you're stuck, there are some general tips on the about page, or you can ask for hints on the subreddit. Please wait one minute before trying again. (You guessed 1070.) [Return to Day 8]
+
+missed escape char \
+
+resultat 1194
+Solution Solver8 solver 8 
+
+t of CodeJean-Francois Alleton 14*
+
+    [About][Stats][Leaderboard][Settings][Log out]
+
+That's not the right answer; your answer is too low. If you're s
+
+15h18
+linelength 6310
+in memory 5199
+Soit  1111
+Solution Solver8 solver 8 
+
+
+
+That's not the right answer; your answer is too low. If you're stuck, there are some general tips on the about page, or you can ask for hints on the subreddit. Please wait one minute before trying again. (You guessed 1111.) [Return to Day 8]
+
+missed that two hexa ..
+
+linelength 6310
+in memory 4977
+Soit  1333
+Solution Solver8 solver 8 
+********* good
+
+The first half of this puzzle is complete! It provides one gold star: *
+--- Part Two ---
+
+Now, let's go the other way. In addition to finding the number of characters of code, you should now encode each code representation as a new string and find the number of characters of the new encoded representation, including the surrounding double quotes.
+
+For example:
+
+    "" encodes to "\"\"", an increase from 2 characters to 6.
+    "abc" encodes to "\"abc\"", an increase from 5 characters to 9.
+    "aaa\"aaa" encodes to "\"aaa\\\"aaa\"", an increase from 10 characters to 16.
+    "\x27" encodes to "\"\\x27\"", an increase from 6 characters to 11.
+
+Your task is to find the total number of characters to represent the newly encoded strings minus the number of characters of code in each original string literal. For example, for the strings above, the total encoded length (6 + 9 + 16 + 11 = 42) minus the characters in the original code representation (23, just like in the first part of this puzzle) is 42 - 23 = 19.
+
+Soit  1333
+ ****** part 2 **
+encodelength 2046
+Solution Solver8 solver 8 
+
+
+hat's the right answer! You are one gold star closer to powering the weather machine. You have completed Day 8! You can [Shareon Twitter Google+ Reddit] this victory or 
+
+- Day 9: All in a Single Night ---
+
+Every year, Santa manages to deliver all of his presents in a single night.
+
+This year, however, he has some new locations to visit; his elves have provided him the distances between every pair of locations. He can start and end at any two (different) locations he wants, but he must visit each location exactly once. What is the shortest distance he can travel to achieve this?
+
+For example, given the following distances:
+
+London to Dublin = 464
+London to Belfast = 518
+Dublin to Belfast = 141
+
+The possible routes are therefore:
+
+Dublin -> London -> Belfast = 982
+London -> Dublin -> Belfast = 605
+London -> Belfast -> Dublin = 659
+Dublin -> Belfast -> London = 659
+Belfast -> Dublin -> London = 605
+Belfast -> London -> Dublin = 982
+
+The shortest of these is London -> Dublin -> Belfast = 605, and so the answer is 605 in this example.
+
+What is the distance of the shortest route?
+
+To begin, get your puzzle input.
+
+ probleme  9
+******* vue.load ******
+Solve resources/AdventProject9.txt
+
+Tentative de resolution du projet : 9
+Chargement pb 9
+parselines filename = resources/AdventProject9.txt
+Solution Solver9 
+sfname = resources/AdventProject9.txt
+
+ (0) Faerun  = Tristram  : 65  : 
+ (1) Faerun  = Tambi  : 129  : 
+ (2) Faerun  = Norrath  : 144  : 
+ (3) Faerun  = Snowdin  : 71  : 
+ (4) Faerun  = Straylight  : 137  : 
+ (5) Faerun  = AlphaCentauri  : 3  : 
+ (6) Faerun  = Arbre  : 149  : 
+ (7) Tristram  = Tambi  : 63  : 
+ (8) Tristram  = Norrath  : 4  : 
+ (9) Tristram  = Snowdin  : 105  : 
+ (10) Tristram  = Straylight  : 125  : 
+ (11) Tristram  = AlphaCentauri  : 55  : 
+ (12) Tristram  = Arbre  : 14  : 
+ (13) Tambi  = Norrath  : 68  : 
+ (14) Tambi  = Snowdin  : 52  : 
+ (15) Tambi  = Straylight  : 65  : 
+ (16) Tambi  = AlphaCentauri  : 22  : 
+ (17) Tambi  = Arbre  : 143  : 
+ (18) Norrath  = Snowdin  : 8  : 
+ (19) Norrath  = Straylight  : 23  : 
+ (20) Norrath  = AlphaCentauri  : 136  : 
+ (21) Norrath  = Arbre  : 115  : 
+ (22) Snowdin  = Straylight  : 101  : 
+ (23) Snowdin  = AlphaCentauri  : 84  : 
+ (24) Snowdin  = Arbre  : 96  : 
+ (25) Straylight  = AlphaCentauri  : 107  : 
+ (26) Straylight  = Arbre  : 14  : 
+ (27) AlphaCentauri  = Arbre  : 46  : 
+Vector Towns[Faerun, Tristram, Tambi, Norrath, Snowdin, Straylight, AlphaCentauri, Arbre]
+Trajet  Towns0
+
+et alors 
+[Faerun, Tristram, Tambi, Norrath, Snowdin, Straylight, AlphaCentauri, Arbre] ==> 458
+  solution  458
+[Faerun, Tristram, Tambi, Norrath, Snowdin, Straylight, AlphaCentauri, Arbre] ==> 458
+  solution  maxi 458
+[Faerun, Tristram, Tambi, Norrath, Snowdin, Straylight, Arbre, AlphaCentauri] ==> 365
+  solution  365
+[Faerun, Tristram, Tambi, Norrath, Snowdin, AlphaCentauri, Arbre, Straylight] ==> 348
+  solution  348
+[Faerun, Tristram, Tambi, Norrath, Straylight, Snowdin, Arbre, AlphaCentauri] ==> 462
+  solution  maxi 462
+[Faerun, Tristram, Tambi, Norrath, Straylight, AlphaCentauri, Snowdin, Arbre] ==> 506
+  solution  maxi 506
+[Faerun, Tristram, Tambi, Norrath, AlphaCentauri, Straylight, Snowdin, Arbre] ==> 636
+  solution  maxi 636
+[Faerun, Tristram, Tambi, Snowdin, Norrath, Straylight, Arbre, AlphaCentauri] ==> 271
+  solution  271
+[Faerun, Tristram, Tambi, Snowdin, Straylight, AlphaCentauri, Norrath, Arbre] ==> 639
+  solution  maxi 639
+[Faerun, Tristram, Tambi, Straylight, Snowdin, Arbre, Norrath, AlphaCentauri] ==> 641
+  solution  maxi 641
+[Faerun, Tristram, Tambi, Straylight, AlphaCentauri, Norrath, Arbre, Snowdin] ==> 647
+  solution  maxi 647
+[Faerun, Tristram, Tambi, AlphaCentauri, Arbre, Straylight, Norrath, Snowdin] ==> 241
+  solution  241
+[Faerun, Tristram, Tambi, Arbre, Snowdin, Straylight, AlphaCentauri, Norrath] ==> 711
+  solution  maxi 711
+[Faerun, Tristram, Tambi, Arbre, Norrath, AlphaCentauri, Straylight, Snowdin] ==> 730
+  solution  maxi 730
+[Faerun, Tristram, Norrath, Snowdin, Tambi, AlphaCentauri, Arbre, Straylight] ==> 211
+  solution  211
+[Faerun, Tristram, Snowdin, Straylight, AlphaCentauri, Norrath, Arbre, Tambi] ==> 772
+  solution  maxi 772
+[Faerun, Tristram, Arbre, Straylight, Norrath, Snowdin, Tambi, AlphaCentauri] ==> 198
+  solution  198
+[Faerun, Tambi, Arbre, Norrath, AlphaCentauri, Straylight, Snowdin, Tristram] ==> 836
+  solution  maxi 836
+[Faerun, Tambi, Arbre, Norrath, AlphaCentauri, Straylight, Tristram, Snowdin] ==> 860
+  solution  maxi 860
+[Faerun, AlphaCentauri, Tambi, Snowdin, Norrath, Straylight, Arbre, Tristram] ==> 136
+  solution  136
+[Faerun, AlphaCentauri, Tambi, Snowdin, Norrath, Tristram, Arbre, Straylight] ==> 117
+  solution  117
+[Tristram, Snowdin, Straylight, Faerun, Tambi, Arbre, Norrath, AlphaCentauri] ==> 866
+  solution  maxi 866
+[Tristram, Snowdin, Straylight, AlphaCentauri, Norrath, Faerun, Arbre, Tambi] ==> 885
+  solution  maxi 885
+[Tambi, Arbre, Faerun, Norrath, AlphaCentauri, Straylight, Tristram, Snowdin] ==> 909
+  solution  maxi 909
+solution mini === 117
+solution maxi === 909
+solver9circuitdone  0
+Solution Solver9 solver9 
+
+
+
+ent of CodeJean-Francois Alleton 18*[About][Stats][Leaderboard][Settings][Log out]
+
+ 
+--- Day 10: Elves Look, Elves Say ---
+
+Today, the Elves are playing a game called look-and-say. They take turns making sequences by reading aloud the previous sequence and using that reading as the next sequence. For example, 211 is read as "one two, two ones", which becomes 1221 (1 2, 2 1s).
+
+Look-and-say sequences are generated iteratively, using the previous value as input for the next step. For each step, take the previous value, and replace each run of digits (like 111) with the number of digits (3) followed by the digit itself (1).
+
+For example:
+
+1 becomes 11 (1 copy of digit 1).
+11 becomes 21 (2 copies of digit 1).
+21 becomes 1211 (one 2 followed by one 1).
+1211 becomes 111221 (one 1, one 2, and two 1s).
+111221 becomes 312211 (three 1s, two 2s, and one 1).
+Starting with the digits in your puzzle input, apply this process 40 times. What is the length of the result?
+
+Your puzzle input is 3113322113.
+
+Answer: 
+ [Submit]
+ 
+ ncrease the thread stack size by increasing the -Xss JVM parameter (e.g. "-Xss2m").
+ 

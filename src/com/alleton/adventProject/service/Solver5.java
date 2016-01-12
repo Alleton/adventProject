@@ -6,8 +6,7 @@ import java.io.IOException;
 
 public class Solver5 {
 	public String solver5 (String sfname){
-		int linenumber =  0 ;
-		 int linenumbernice = 0 ;
+		int linenumbernice = 0 ;
 		String line ;
 		
 		String lettre  ;
@@ -17,21 +16,16 @@ public class Solver5 {
 		try {
 			FileReader filereader = new FileReader(sfname);
 			BufferedReader reader = new BufferedReader(filereader);
-			/* relecture premiere ligne  */
-			line = reader.readLine();
 			
-			
-			/* lecture deuxieme ligne  */
+			/* lecture lignes  */
 			while ((line = reader.readLine()) != null) {
-				linenumber ++ ;
+				// linenumber ++ ;
 				
 				Boolean lettredouble = false ;
-				// System.out.println(" line " + line ) ;
 				// It contains at least three vowels (aeiou only), like aei, xazegov, or aeiouaeiouaeiou.
 				nbvoyelles = 0 ;
 				for ( int i = 0 ; i< line.length();i ++ ){
 					lettre = line.substring(i, i+1) ;
-					// System.out.println(" lettre " + lettre ) ;
 					if ( lettre.matches("[aeiou]")){
 						nbvoyelles ++ ;
 					}  // end compare voyelle
@@ -39,7 +33,6 @@ public class Solver5 {
 	
 				if ( nbvoyelles >= 3 ) {
 					// continue 
-					// System.out.println("line "  + linenumber  + "  plus de 3 voyelles ") ;
 					//It contains at least one letter that appears twice in a row,
 					// like xx, abcdde (dd), or aabbccdd (aa, bb, cc, or dd).
 					for ( int i = 0 ; i< line.length()-1 ; i ++ ){
@@ -73,22 +66,18 @@ public class Solver5 {
 			
 			System.out.println(" nice ones first method " + linenumbernice ) ;
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				
 				throw new IllegalArgumentException("Unable to load " + sfname, e);
 				//e.printStackTrace();
 			}
 		try {
 			FileReader filereader = new FileReader(sfname);
 			BufferedReader reader = new BufferedReader(filereader);
-			/* relecture premiere ligne  */
-			line = reader.readLine();
 			
-			linenumber = 0 ; 
+			// linenumber = 0 ; 
 			linenumbernice = 0 ;
-			/* lecture deuxieme ligne  */
+			/* lecture  lignes  */
 			while ((line = reader.readLine()) != null) {
-				linenumber ++ ;
+				// linenumber ++ ;
 				
 				// select 2 letters
 				// System.out.println(" line " + line ) ;
@@ -100,20 +89,15 @@ public class Solver5 {
 					lettre = line.substring(i, i+2) ; // this first two letters
 					//System.out.println(" lettre " + lettre ) ;
 					// now look to the end to find those 2 letters
-					//System.out.println(" compare to : " + line.substring(i+2, line.length()) ) ; 										
 					if ( line.substring(i+2, line.length()).matches(".*" + lettre + ".*")) {
 						// ok we continue
-						// let's print this line with letter
-						// System.out.println(" line  + lettre " + line  + " " +  linenumber + " "  + lettre ) ;
 						// now 
 						// It contains at least one letter which repeats with exactly one letter between them,
 						//like xyx, abcdefeghi (efe), or even aaa.
 						// we read the same line for each char and find it ( or not ) 2 space after
 						for ( int j = 0 ; j< line.length()-2 ; j ++ ){
 							if ( line.charAt(j) == line.charAt(j + 2 )){
-								
 								linenumbernice ++ ;
-								System.out.println(" line  + lettre " + line  + " " +  linenumber + " "  + line.charAt(j) ) ;
 								break ;
 							}  // end compare double
 						}
@@ -128,13 +112,9 @@ public class Solver5 {
 			
 		System.out.println(" nice ones  " + linenumbernice ) ;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			
 			throw new IllegalArgumentException("Unable to load " + sfname, e);
 			//e.printStackTrace();
 		}
-		
-		
 		
 		return "ok part 2 ";
 	
