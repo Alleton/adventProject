@@ -6,12 +6,15 @@ import java.io.IOException;
 
 public class Solver10 {
 	StringBuffer  solution = new StringBuffer("");
+	StringBuffer  probleme = new StringBuffer("");
+	private Chrono chrono = new Chrono () ;
 	int linel = 0;
 	
 	public String solver10 (String sfname){
 		//String res = "";
 		String line ;
 		// int iteration ;
+		long startiteration = 0   ;
 		
 		 try {
 			 FileReader filereader = new FileReader(sfname);
@@ -22,19 +25,35 @@ public class Solver10 {
 		 
 			 while ((line = reader.readLine()) != null) {
 				 System.out.println(" line " + line );	 
-				 analyse (  line );
+				 chrono.start();          // 
+				 solution.append(line) ;
+				 //analyse (  line );
 		
-		 		 for ( int  iteration = 1 ; iteration < 50; iteration ++) {
+		 		 for ( int  iteration = 1 ; iteration <= 40; iteration ++) {
 		
-		 			line = solution.toString() ;
-					 solution.setLength(0);
+		 			//line = solution.toString() ;
+		 			probleme.setLength(0);
+		 			probleme.append(solution) ;
+		 			//System.out.println(" at start iteration probleme = " + probleme); 
+		 			
+		 			solution.setLength(0);
 					 System.gc(); 
 					 System.out.println(" iteration " + ( iteration ) );	 
-					 analyse (  line );
-					 System.out.println(" length line " + line.length() );	 
+					 System.out.println(" duree iteration " +  Long.toString(  chrono.getTimeElapsed() - startiteration ))  ;
+					 startiteration =  chrono.getTimeElapsed() ;
+					 //System.out.println(" before iteration probleme = " + probleme);
+					 analyse (  0 );
+					 //analyse (  line );
+					 probleme.setLength(0);
+					 probleme.append(solution) ;
+					 //System.out.println(" inside iteration solution = " + solution);
+					 //System.out.println(" inside iteration probleme = " + probleme);
+					 System.out.println(" length line " + probleme.length() );	 
+					 
 					 linel = line.length() ;
+					 
 				 }
-				 
+		 		System.out.println(" duree " + Long.toString(chrono.getFinalTimeElapsed() ) ) ;
 				 //System.out.println(" solution " + solution );	 
 				 
 			 }
@@ -46,25 +65,27 @@ public class Solver10 {
 		//e.printStackTrace();
 	}
 		
-		return String.valueOf(linel) ;
+		return String.valueOf(probleme.length()) ;
 	} // 
 	
-	private void  analyse ( String line ) {
+	private void  analyse ( int start ) {
 		char c ;
-		//int nbchar = 1 ; // we got 1 char c
-		//String resultat = "";
-		//String reste = "";
-		int linelength = line.length() ;
+		// System.out.println( "analyse line probleme :" + probleme + ":"  + " = " + probleme.length() ) ;
+		// String ligne = probleme.substring(start,probleme.length());
+		 int linelength = probleme.substring(start ,probleme.length()).length();
 		
-		//System.out.println( "analyse line :" + line + ":" ) ;
+		
+		//System.out.println( "analyse line :" + ligne + ":"  + " = "+ linelength) ;
+		//System.out.println( "analyse line : start " + start + ":"  + " = "+ linelength) ;
 		
 		// ligne vide ??
-		if (line.length() == 0 ) {
+		//if (ligne.length() == 0 ) {
+		if (probleme.length() == start ) {
 			 //return line;
 		} else {
-		 c= line.charAt(0);	
+		 c= probleme.charAt(start);
 		 // serai-ce le dernier character ??
-		 if (line.length() == 1) {
+		 if (probleme.length() == start + 1) {
 			 //System.out.println( "begore line.length() == 1: " + solution ) ;
 			 //solution = solution + "1" + c ;
 			 solution.append('1');
@@ -76,10 +97,10 @@ public class Solver10 {
 			 int i = 1 ;
 			 
 			 while ( i <linelength  ){
-				 if ( c == line.charAt(i)){
+				 if ( c == probleme.charAt(start + i ) )  {
 					 // on continue
 					 i ++ ;  
-					 while ( ( i <linelength ) && (c == line.charAt(i))  ){
+					 while ( ( i <linelength ) && (c == probleme.charAt(start + i ) )  ){
 						 // System.out.println( "reste le char c ? " + c + " at " + i )  ;
 						 i ++ ;
 					 }
@@ -110,34 +131,29 @@ public class Solver10 {
 						 return ;
 					 } else {
 						 // ben c est pas fini
-						 // System.out.println( "before pas fini : " + solution ) ;
+						 //System.out.println( "before pas fini : " + solution ) ;
 						 //solution = solution + i + c ;
 						 solution.append(i);
 						 solution.append(c);
-						 //System.out.println( "after  pas fini : " + solution ) ;
-						 //i ++ ;
-						 if  ( !line.substring(i, linelength).equals("") )  {
-							 // System.out.println( "reste a analyse line :" + line.substring(i, linelength) + ":" ) ;
-							 analyse (line.substring(i, linelength)) ;
+						 // System.out.println( "after  pas fini : " + solution ) ;
+						 
+						 
+						 if (probleme.length() > start + i ){
+							 //System.out.println( "reste a analyse line :" + ligne.substring(i, linelength) + ":" ) ;
+							 analyse (start + i  ) ;
 							 	 
 						 }
 						 else {
-							 System.out.println( "reste a analyse line error  line     :" + line + ":" ) ;
-							 //System.out.println( "reste a analyse line error iteration :" + this.i + ":" ) ;
+							 System.out.println( "reste a analyse line error  line     :" +  probleme.substring( start + i, linelength) );
 							 System.out.println( "reste a analyse line error  i        :" + i  + ":" ) ;
-							 System.out.println( "reste a analyse line error :" + line.substring(i, linelength) + ":" ) ;
 						 }
-							 
+						 //System.out.println( " this one return analyse solution = " + solution  ) ; 
 						 return ;
 					 }
-					        
-				 
 				
 				 }  // else de c == line.charAt(i))
 				 // on finit par c ..
 				 //System.out.println( " on finit par c .. il faut ajouter le nb char " +  i + " :" + c ) ;
-				  
-				 //solution = solution + i + c ;
 				 //System.out.println( " return on finit par c = " + solution  ) ;
 			 }   //  while ( i <linelength  
 					 
@@ -145,8 +161,7 @@ public class Solver10 {
 		} // end (line.length() == 0)
 		 // System.out.println( " return analyse solution = " + solution  ) ;
 		 System.out.println( " return analyse solution = " + solution.length()  ) ;
-		 
+		 //System.out.println( " return analyse solution = " + solution  ) ;
 		 return ;
 	} // analyse
-
 }
