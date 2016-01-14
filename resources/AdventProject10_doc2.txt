@@ -1,0 +1,38 @@
+ probleme  10
+******* vue.load ******
+Solve resources/AdventProject10.txt
+
+Tentative de resolution du projet : 10
+Chargement pb 10
+ line 3113322113
+ length line 12 time iteration 16 duree iteration 16
+ length line 18 time iteration 47 duree iteration 31
+ length line 22 time iteration 47 duree iteration 0
+ length line 28 time iteration 63 duree iteration 16
+ length line 38 time iteration 78 duree iteration 15
+ length line 48 time iteration 85 duree iteration 7
+ length line 60 time iteration 100 duree iteration 15
+ length line 76 time iteration 100 duree iteration 0
+ length line 100 time iteration 116 duree iteration 16
+ length line 118 time iteration 116 duree iteration 0
+ length line 146 time iteration 132 duree iteration 16
+ length line 192 time iteration 132 duree iteration 0
+ length line 246 time iteration 147 duree iteration 15
+ length line 328 time iteration 147 duree iteration 0
+ length line 428 time iteration 163 duree iteration 0
+ length line 562 time iteration 178 duree iteration 15
+ length line 732 time iteration 178 duree iteration 0
+ length line 970 time iteration 194 duree iteration 16
+ length line 1250 time iteration 194 duree iteration 0
+ length line 1622 time iteration 210 duree iteration 16
+ length line 2128 time iteration 210 duree iteration 0
+ length line 2754 time iteration 225 duree iteration 15
+ length line 3592 time iteration 241 duree iteration 16
+ length line 4728 time iteration 257 duree iteration 16
+ length line 6162 time iteration 272 duree iteration 15
+ length line 8072 time iteration 288 duree iteration 16
+ length line 10504 time iteration 319 duree iteration 31
+ length line 13736 time iteration 350 duree iteration 31
+ length line 17874 time iteration 413 duree iteration 63
+ duree -1452684387135
+Solution Solver10 17874

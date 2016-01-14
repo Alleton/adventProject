@@ -1,0 +1,2 @@
+	setCharAt(int index, char ch)
+The character at the specified index is set to ch.

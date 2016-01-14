@@ -1,0 +1,169 @@
+ probleme  10
+******* vue.load ******
+Solve resources/AdventProject10.txt
+
+Tentative de resolution du projet : 10
+Chargement pb 10
+ line 3113322113
+ iteration 1
+ duree iteration 16
+ return analyse solution = 12
+ length line 12
+ iteration 2
+ duree iteration 47
+ return analyse solution = 18
+ length line 18
+ iteration 3
+ duree iteration 0
+ return analyse solution = 22
+ length line 22
+ iteration 4
+ duree iteration 15
+ return analyse solution = 28
+ length line 28
+ iteration 5
+ duree iteration 0
+ return analyse solution = 38
+ length line 38
+ iteration 6
+ duree iteration 16
+ return analyse solution = 48
+ length line 48
+ iteration 7
+ duree iteration 0
+ return analyse solution = 60
+ length line 60
+ iteration 8
+ duree iteration 16
+ return analyse solution = 76
+ length line 76
+ iteration 9
+ duree iteration 15
+ return analyse solution = 100
+ length line 100
+ iteration 10
+ duree iteration 0
+ return analyse solution = 118
+ length line 118
+ iteration 11
+ duree iteration 16
+ return analyse solution = 146
+ length line 146
+ iteration 12
+ duree iteration 0
+ return analyse solution = 192
+ length line 192
+ iteration 13
+ duree iteration 15
+ return analyse solution = 246
+ length line 246
+ iteration 14
+ duree iteration 0
+ return analyse solution = 328
+ length line 328
+ iteration 15
+ duree iteration 16
+ return analyse solution = 428
+ length line 428
+ iteration 16
+ duree iteration 0
+ return analyse solution = 562
+ length line 562
+ iteration 17
+ duree iteration 16
+ return analyse solution = 732
+ length line 732
+ iteration 18
+ duree iteration 0
+ return analyse solution = 970
+ length line 970
+ iteration 19
+ duree iteration 15
+ return analyse solution = 1250
+ length line 1250
+ iteration 20
+ duree iteration 16
+ return analyse solution = 1622
+ length line 1622
+ iteration 21
+ duree iteration 0
+ return analyse solution = 2128
+ length line 2128
+ iteration 22
+ duree iteration 16
+ return analyse solution = 2754
+ length line 2754
+ iteration 23
+ duree iteration 0
+ return analyse solution = 3592
+ length line 3592
+ iteration 24
+ duree iteration 15
+ return analyse solution = 4728
+ length line 4728
+ iteration 25
+ duree iteration 16
+ return analyse solution = 6162
+ length line 6162
+ iteration 26
+ duree iteration 8
+ return analyse solution = 8072
+ length line 8072
+ iteration 27
+ duree iteration 31
+ return analyse solution = 10504
+ length line 10504
+ iteration 28
+ duree iteration 31
+ return analyse solution = 13736
+ length line 13736
+ iteration 29
+ duree iteration 32
+ return analyse solution = 17874
+ length line 17874
+ iteration 30
+ duree iteration 62
+ return analyse solution = 23248
+ length line 23248
+ iteration 31
+ duree iteration 63
+ return analyse solution = 30322
+ length line 30322
+ iteration 32
+ duree iteration 140
+ return analyse solution = 39392
+ length line 39392
+ iteration 33
+ duree iteration 235
+ return analyse solution = 51438
+ length line 51438
+ iteration 34
+ duree iteration 281
+ return analyse solution = 67070
+ length line 67070
+ iteration 35
+ duree iteration 422
+ return analyse solution = 87402
+ length line 87402
+ iteration 36
+ duree iteration 825
+ return analyse solution = 114056
+ length line 114056
+ iteration 37
+ duree iteration 1427
+ return analyse solution = 148740
+ length line 148740
+ iteration 38
+ duree iteration 2325
+ return analyse solution = 193828
+ length line 193828
+ iteration 39
+ duree iteration 4008
+ return analyse solution = 252594
+ length line 252594
+ iteration 40
+ duree iteration 6587
+ return analyse solution = 329356
+ length line 329356
+ duree -1452708942988
+Solution Solver10 329356
