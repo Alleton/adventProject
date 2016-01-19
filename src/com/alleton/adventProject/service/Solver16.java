@@ -4,13 +4,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Vector;
 
-import com.alleton.adventProject.model.Solver15ingredient;
 import com.alleton.adventProject.model.Solver16aunt;
 
 public class Solver16 {
 	// Solver14rennes
 		Vector<Solver16aunt> les_aunts = new Vector<Solver16aunt>();
-		int children    = 3;
+/*		int children    = 3;
 		int cats        = 7;
 		int samoyeds    = 2;
 		int pomeranians = 3;
@@ -20,20 +19,19 @@ public class Solver16 {
 		int trees       = 3;
 		int cars        = 2;
 		int perfumes    = 1	;
+*/		
 	
 	public String solver16 (String sfname){
 		int happiness = 0 ;
 		
 		try {
-			//Solver7circuit 
+			//Solver167aunt 
 			les_aunts =  parselines(sfname) ;
-			//System.out.println ("solver13 lesconvives   \r\n " + lesconvives );
 			// this should initialyse values ==> affichage console
 			System.out.println ( "sfname = " + sfname ) ;
-			//System.out.println (table.convivesToString());
 			
 			// try to solve
-			//happiness = solve ( ) ;
+			happiness = solve ( ) ;
 			System.out.println ("solver16 done  " + happiness );
 			
 			
@@ -46,9 +44,30 @@ public class Solver16 {
 	} //solver16
 
 	
-	void solve () {
+	int  solve () {
+		Solver16aunt tanteref;
+		Solver16aunt cettetante;
+		int nbr_ok =0;
 		// for each aunt verify parameters
+		//System.out.println ("solver16 = "  + les_aunts.toString() ) ;
 		
+		tanteref  = les_aunts.get(0) ;
+		
+		
+		
+		for (int i=1 ; i<les_aunts.size() ;i++ ) {
+			System.out.println ("test " + i  + " " + les_aunts.get(i).auntToString() ) ;
+			cettetante  = les_aunts.get(i) ;
+			if (cettetante.getCats() == tanteref.getCats() ) {
+				System.out.println ("cats OK = " + tanteref.getCats() + " "   + cettetante.auntToString()) ;
+			}
+			
+			
+			
+		}
+		
+		
+		return (0);
 	}
 	
 	public Vector<Solver16aunt>  parselines(String sfname) {
@@ -56,7 +75,6 @@ public class Solver16 {
 
 		Vector<Solver16aunt> mes_tantes  = new Vector<Solver16aunt> ();
 		String line = "";
-		int nblines = 0 ;
 
 		// lecture ticket
 		try {
@@ -73,23 +91,25 @@ public class Solver16 {
 				String[] parts =line.split(" ");
 				tantet =  memorise (  tantet ,parts[0]  ,Integer.parseInt( parts[1]) ) ;
 			}
-		} catch (Exception e) {
+			mes_tantes.add(tantet);         // save tghis one
+			reader.close();
+			filereader.close();
+
+		} catch (Exception e) { 
 			e.printStackTrace();
 		}
 		
 		
 		try {
-			nblines = 0 ;
 			FileReader filereader = new FileReader(sfname);
 			BufferedReader reader = new BufferedReader(filereader);
 			while ((line = reader.readLine()) != null) {
 				
-				nblines ++ ;
 				line = line.trim() ;
 				line = line.replace(",", ""); // remove all those ","
 				line = line.replace(":", ""); // remove all those ":"
 				// parseline
-				System.out.println("parseline line  = " + line ) ;
+				//System.out.println("parseline line  = " + line ) ;
 				String[] parts =line.split(" ");
 				Solver16aunt tante = new Solver16aunt();
 				
