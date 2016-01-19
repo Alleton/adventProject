@@ -1,0 +1,46 @@
+ probleme  14
+******* vue.load ******
+Solve resources/AdventProject14.txt
+
+Tentative de resolution du projet : 14
+Chargement pb 14
+parseline line  = Vixen can fly 8 km/s for 8 seconds, but then must rest for 53 seconds.
+parseline line  = Blitzen can fly 13 km/s for 4 seconds, but then must rest for 49 seconds.
+parseline line  = Rudolph can fly 20 km/s for 7 seconds, but then must rest for 132 seconds.
+parseline line  = Cupid can fly 12 km/s for 4 seconds, but then must rest for 43 seconds.
+parseline line  = Donner can fly 9 km/s for 5 seconds, but then must rest for 38 seconds.
+parseline line  = Dasher can fly 10 km/s for 4 seconds, but then must rest for 37 seconds.
+parseline line  = Comet can fly 3 km/s for 37 seconds, but then must rest for 76 seconds.
+parseline line  = Prancer can fly 9 km/s for 12 seconds, but then must rest for 97 seconds.
+parseline line  = Dancer can fly 37 km/s for 1 seconds, but then must rest for 36 seconds.
+Solution parse Solver14 
+ les rennes size 9
+ name    = Vixen  :  vitesse = 8  :  Endurance = 8  :  Repos    =  53  = 
+ name    = Blitzen  :  vitesse = 13  :  Endurance = 4  :  Repos    =  49  = 
+ name    = Rudolph  :  vitesse = 20  :  Endurance = 7  :  Repos    =  132  = 
+ name    = Cupid  :  vitesse = 12  :  Endurance = 4  :  Repos    =  43  = 
+ name    = Donner  :  vitesse = 9  :  Endurance = 5  :  Repos    =  38  = 
+ name    = Dasher  :  vitesse = 10  :  Endurance = 4  :  Repos    =  37  = 
+ name    = Comet  :  vitesse = 3  :  Endurance = 37  :  Repos    =  76  = 
+ name    = Prancer  :  vitesse = 9  :  Endurance = 12  :  Repos    =  97  = 
+ name    = Dancer  :  vitesse = 37  :  Endurance = 1  :  Repos    =  36  = 
+ name    = Vixen  :  vitesse = 8  :  Endurance = 8  :  Repos    =  53  = 
+Renne = Vixen  court 2640
+ name    = Blitzen  :  vitesse = 13  :  Endurance = 4  :  Repos    =  49  = 
+Renne = Blitzen  court 2496
+ name    = Rudolph  :  vitesse = 20  :  Endurance = 7  :  Repos    =  132  = 
+Renne = Rudolph  court 2540
+ name    = Cupid  :  vitesse = 12  :  Endurance = 4  :  Repos    =  43  = 
+Renne = Cupid  court 2592
+ name    = Donner  :  vitesse = 9  :  Endurance = 5  :  Repos    =  38  = 
+Renne = Donner  court 2655
+ name    = Dasher  :  vitesse = 10  :  Endurance = 4  :  Repos    =  37  = 
+Renne = Dasher  court 2460
+ name    = Comet  :  vitesse = 3  :  Endurance = 37  :  Repos    =  76  = 
+Renne = Comet  court 2493
+ name    = Prancer  :  vitesse = 9  :  Endurance = 12  :  Repos    =  97  = 
+Renne = Prancer  court 2484
+ name    = Dancer  :  vitesse = 37  :  Endurance = 1  :  Repos    =  36  = 
+Renne = Dancer  court 2516
+Gagnant = Donner
+Solution Solver14 solver14 0

@@ -1,0 +1,156 @@
+package com.alleton.adventProject.service;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.Vector;
+
+import com.alleton.adventProject.model.Solver14rennes;
+import com.alleton.adventProject.model.Solver15ingredient;;
+
+
+public class Solver15 {
+
+	// Solver15ingredient
+	Vector<Solver15ingredient> les_ingredients = new Vector<Solver15ingredient>();	
+		
+		Solver15(){
+				
+		}
+		
+	/**
+	 * solver	
+	 * @param sfname
+	 * @return
+	 */
+	
+	
+	public String solver15 (String sfname){
+		int happiness = 0 ;
+		int maxpoints=0;
+		
+		try {
+			les_ingredients =  parselines(sfname) ;
+			// verif parse OK
+			for ( int i = 0 ; i < les_ingredients.size() ; i++ ) {
+				System.out.println (les_ingredients.elementAt(i).toString());
+			}
+			
+			//try to solve
+			System.out.println("maxi = " + solve(100) ) ;
+			
+			/*
+			// part 2
+			maxpoints = solve2(2503 ) ;
+			System.out.println("maxpoints = " + maxpoints ) ;
+				*/
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "solver15 " + happiness;
+	} // end solver14 
+
+	int solve(int total_ing) {
+		int result = 0 ;
+		
+		
+			// pour tous les melanges 1er ingredient
+		//for ( int i = 0 ; i <= total_ing ; i ++ ) {
+		for ( int i1 = 0 ; i1 <= total_ing ; i1 ++ ) {
+			int reste1 = total_ing - i1 ;    // reste pour autre ingredient
+			for ( int i2 = 0 ; i2 <= reste1 ; i2 ++ ) {
+				int reste2 = reste1 - i2 ;
+				for ( int i3 = 0 ; i3 <= reste1 ; i3 ++ ){
+					int reste3 = reste2 - i3 ;
+					
+					int capa = 0 ;
+					int dura = 0;
+					int flavo = 0 ;
+					int txtu = 0 ;
+					int inter = 0 ;
+					// calcul capacity
+					capa = capa + ( i1 * les_ingredients.elementAt(0).getCapacity() ) ;
+					capa = capa + ( reste1 * les_ingredients.elementAt(1).getCapacity() ) ;
+					capa = capa + ( reste2 * les_ingredients.elementAt(2).getCapacity() ) ;
+					capa = capa + ( reste3 * les_ingredients.elementAt(3).getCapacity() ) ;
+					
+				}
+			}
+			
+			int capa = 0 ;
+			int dura = 0;
+			int flavo = 0 ;
+			int txtu = 0 ;
+			int inter = 0 ;
+			// calcul capacity
+				capa = capa + ( i1 * les_ingredients.elementAt(0).getCapacity() ) ;
+				capa = capa + ( reste * les_ingredients.elementAt(1).getCapacity() ) ;
+				if (capa < 0) capa = 0 ; // elimine les negas
+				System.out.println("capa  pour i = " + i1 + " reste = " + reste + " = " + capa ) ;
+			// calcul durability
+				dura = dura + ( i1 * les_ingredients.elementAt(0).getDurability() ) ;
+				dura = dura + ( reste * les_ingredients.elementAt(1).getDurability() ) ;
+				if (dura < 0) dura = 0 ; // elimine les negas
+				System.out.println("dura  pour i = " + i1 + " reste = " + reste + " = " + dura ) ;
+			// flavor
+				flavo = flavo + ( i1 * les_ingredients.elementAt(0).getFlavor() ) ;
+				flavo = flavo + ( reste * les_ingredients.elementAt(1).getFlavor() ) ;
+				if (flavo < 0) flavo = 0 ; // elimine les negas
+				System.out.println("flavo  pour i = " + i1 + " reste = " + reste + " = " + flavo ) ;
+			// texture
+				txtu = txtu + ( i1 * les_ingredients.elementAt(0).getTexture()) ;
+				txtu = txtu + ( reste * les_ingredients.elementAt(1).getTexture()) ;
+				if (txtu < 0) txtu = 0 ; // elimine les negas
+				System.out.println("txtu  pour i = " + i1 + " reste = " + reste + " = " + txtu ) ;
+			// resultat intermediaire
+				inter = capa * dura * flavo * txtu ;
+				System.out.println("points  pour i = " + i1 + " reste = " + reste + " = " + inter ) ;
+				if ( inter > result ) result = inter ;
+		}
+		 
+		
+		
+		return result ;
+	}
+	
+	
+	public Vector<Solver15ingredient>  parselines(String sfname) {
+		String line = "";
+		int nblines = 0 ;
+		 //Vector<Solver14rennes> lire_rennes = new Vector<Solver14rennes>();
+		Vector<Solver15ingredient> mes_ingr = new Vector<Solver15ingredient>() ;
+		
+		try {
+			FileReader filereader = new FileReader(sfname);
+			BufferedReader reader = new BufferedReader(filereader);
+			while ((line = reader.readLine()) != null) { 
+				line = line.trim() ;
+				line = line.replace(",", ""); // remove all those ","
+				// parseline
+				System.out.println("parseline line  = " + line ) ;
+				String[] parts =line.split(" ");
+				Solver15ingredient ingredient = new Solver15ingredient();
+				//les_ingredients
+				
+				ingredient.setIngredient(parts[0]);
+				ingredient.setCapacity(Integer.parseInt(parts[2]));
+				ingredient.setDurability(Integer.parseInt(parts[4]));
+				ingredient.setFlavor(Integer.parseInt(parts[6]));
+				ingredient.setTexture(Integer.parseInt(parts[8]));
+				ingredient.setCalories(Integer.parseInt(parts[10]));
+	
+				
+				mes_ingr.add(ingredient) ;
+				
+				nblines ++ ;
+				
+			} // end for
+			reader.close();
+			filereader.close();
+			System.out.println("Solution parse Solver14 " );
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mes_ingr ;
+	} // end parseline	
+	
+}
