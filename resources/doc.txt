@@ -630,12 +630,12 @@ Incrementing is just like counting with numbers: xx, xy, xz, ya, yb, and so on. 
 
 Unfortunately for Santa, a new Security-Elf recently started, and he has imposed some additional
  password requirements:
-
+1 :
 Passwords must include one increasing straight of at least three letters, like abc, bcd, cde, and so
  on, up to xyz. They cannot skip letters; abd doesn't count.
-Passwords may not contain the letters i, o, or l, as these letters can be mistaken for other characters
- and are therefore confusing.
-Passwords must contain at least two different, non-overlapping pairs of letters, like aa, bb, or zz.
+2 :Passwords may not contain the letters i, o, or l, as these letters can be mistaken for other
+ characters and are therefore confusing.
+3 : Passwords must contain at least two different, non-overlapping pairs of letters, like aa, bb, or zz.
 
 For example:
 
@@ -656,6 +656,543 @@ Answer:
 
 You can also [Share] this puzzle.
 
+passwords must be exactly
+ eight lowercase letters 
+ he finds his new password by incrementing his old
+ password string repeatedly until it is valid.
+ Incrementing is just like counting with numbers: xx, xy, xz, ya, yb, and so on. Increase the rightmost
+ letter one step; if it was z, it wraps around to a, and repeat with the next letter to the left until
+ one doesn't wrap around.
+ 
+***************
+Given Santa's current password (your puzzle input), what should his next password be?
 
+Your puzzle answer was vzbxxyzz.
+
+The first half of this puzzle is complete! It provides one gold star: *
+
+--- Part Two ---
+
+Santa's password expired again. What's the next one?
+
+Your puzzle input is still vzbxkghb.
+
+newpassw  OK   vzcaabcc
+ last pwd vzcaabcc
+ duree en sec 4561.203538329
+Solution Solver11 8
+
+That's the right answer! You are one gold star closer to powering the weather machine. You have completed Day 11! You can [Share] this victory or [Return to your advent calendar].
+
+
+********************************
+
+--- Day 12: JSAbacusFramework.io ---
+
+Santa's Accounting-Elves need help balancing the books after a recent order. Unfortunately, their accounting software uses a peculiar storage format. That's where you come in.
+
+They have a JSON document which contains a variety of things: arrays ([1,2,3]), objects ({"a":1, "b":2}), numbers, and strings. Your first job is to simply find all of the numbers throughout the document and add them together.
+
+For example:
+
+[1,2,3] and {"a":2,"b":4} both have a sum of 6.
+[[[3]]] and {"a":{"b":4},"c":-1} both have a sum of 3.
+{"a":[-1,1]} and [-1,{"a":1}] both have a sum of 0.
+[] and {} both have a sum of 0.
+You will not encounter any strings containing numbers.
+
+What is the sum of all numbers in the document?
+
+To begin, get your puzzle input.
+
+Answer: 
+ [Submit]
+
+You can also [Share] this puzzle.
+duree en sec 0.009753518
+Solution Solver12 111754
+
+//////////////////
+--- Part Two ---
+
+Uh oh - the Accounting-Elves have realized that they double-counted everything red.
+
+Ignore any object (and all of its children) which has any property with the value "red". Do this only for objects ({...}), not arrays ([...]).
+
+[1,2,3] still has a sum of 6.
+[1,{"c":"red","b":2},3] now has a sum of 4, because the middle object is ignored.
+{"d":"red","e":[1,2,3,4],"f":5} now has a sum of 0, because the entire structure is ignored.
+[1,"red",5] has a sum of 6, because "red" in an array has no effect.
+Although it hasn't changed, you can still get your puzzle input.
+
+
+That's not the right answer; your answer is too high. If you're stuck, there are some general tips on the about page, or you can ask for hints on the subreddit. Please wait one minute before trying again. (You guessed 82948.) [Return to Day 12]
+
+== 65402
+
+Advent of CodeJean-Francois Alleton 24*[About][Stats][Leaderboard][Settings][Log out]
 
  
+That's the right answer! You are one gold star closer to powering the weather machine. You have completed Day 12! You can [Shar
+
+
+
+of CodeJean-Francois Alleton 24*[About][Stats][Leaderboard][Settings][Log out]
+
+ 
+--- Day 13: Knights of the Dinner Table ---
+
+In years past, the holiday feast with your family hasn't gone so well. Not everyone gets along! This year, you resolve, will be different. You're going to find the optimal seating arrangement and avoid all those awkward conversations.
+
+You start by writing up a list of everyone invited and the amount their happiness would increase or decrease if they were to find themselves sitting next to each other person. You have a circular table that will be just big enough to fit everyone comfortably, and so each person will have exactly two neighbors.
+
+For example, suppose you have only four attendees planned, and you calculate their potential happiness as follows:
+
+Alice would gain 54 happiness units by sitting next to Bob.
+Alice would lose 79 happiness units by sitting next to Carol.
+Alice would lose 2 happiness units by sitting next to David.
+Bob would gain 83 happiness units by sitting next to Alice.
+Bob would lose 7 happiness units by sitting next to Carol.
+Bob would lose 63 happiness units by sitting next to David.
+Carol would lose 62 happiness units by sitting next to Alice.
+Carol would gain 60 happiness units by sitting next to Bob.
+Carol would gain 55 happiness units by sitting next to David.
+David would gain 46 happiness units by sitting next to Alice.
+David would lose 7 happiness units by sitting next to Bob.
+David would gain 41 happiness units by sitting next to Carol.
+Then, if you seat Alice next to David, Alice would lose 2 happiness units (because David talks so much), but David would gain 46 happiness units (because Alice is such a good listener), for a total change of 44.
+
+If you continue around the table, you could then seat Bob next to Alice (Bob gains 83, Alice gains 54). Finally, seat Carol, who sits next to Bob (Carol gains 60, Bob loses 7) and David (Carol gains 55, David gains 41). The arrangement looks like this:
+
+     +41 +46
++55   David    -2
+Carol       Alice
++60    Bob    +54
+     -7  +83
+After trying every other seating arrangement in this hypothetical scenario, you find that this one is the most optimal, with a total change in happiness of 330.
+
+What is the total change in happiness for the optimal seating arrangement of the actual guest list?
+
+To begin, get your puzzle input.
+
+===> 664
+That's the right answer! You are one gold star closer to powering the weather machine. [Return to Day 13]
+
+ puzzle answer was 664.
+
+The first half of this puzzle is complete! It provides one gold star: *
+
+--- Part Two ---
+
+In all the commotion, you realize that you forgot to seat yourself. At this point, you're pretty apathetic toward the whole thing, and your happiness wouldn't really go up or down regardless of who you sit next to. You assume everyone else would be just as ambivalent about sitting next to you, too.
+
+So, add yourself to the list, and give all happiness relationships that involve you a score of 0.
+
+What is the total change in happiness for the optimal seating arrangement that actually includes yourself?
+
+Although it hasn't changed, you can still get your puzzle input.
+
+Answer: 
+ [Submit]
+ 
+
+
+  solution  640
+[Me, Frank, Eric, George, Bob, Alice, David, Mallory, Carol] ==> 640
+  solution  640
+Solution Solver13 solver13 640
+Advent of CodeJean-Francois Alleton 26*[About][Stats][Leaderboard][Settings][Log out]
+
+ 
+That's the right answer! You are one gold star closer to powering the weather machine. You have completed Day 13! You can [Sh
+
+///////////////////////////////////////////////////////
+
+ Day 14: Reindeer Olympics ---
+
+This year is the Reindeer Olympics! Reindeer can fly at high speeds, but must rest occasionally to recover their energy. Santa would like to know which of his reindeer is fastest, and so he has them race.
+
+Reindeer can only either be flying (always at their top speed) or resting (not moving at all), and always spend whole seconds in either state.
+
+For example, suppose you have the following Reindeer:
+
+Comet can fly 14 km/s for 10 seconds, but then must rest for 127 seconds.
+Dancer can fly 16 km/s for 11 seconds, but then must rest for 162 seconds.
+After one second, Comet has gone 14 km, while Dancer has gone 16 km. After ten seconds, Comet has gone 140 km, while Dancer has gone 160 km. On the eleventh second, Comet begins resting (staying at 140 km), and Dancer continues on for a total distance of 176 km. On the 12th second, both reindeer are resting. They continue to rest until the 138th second, when Comet flies for another ten seconds. On the 174th second, Dancer flies for another 11 seconds.
+
+In this example, after the 1000th second, both reindeer are resting, and Comet is in the lead at 1120 km (poor Dancer has only gotten 1056 km by that point). So, in this situation, Comet would win (if the race ended at 1000 seconds).
+
+Given the descriptions of each reindeer (in your puzzle input), after exactly 2503 seconds, what distance has the winning reindeer traveled?
+
+To begin, get your puzzle input.
+
+Renne = Donner  court 2655
+ name    = Dasher  :  vitesse = 10  :  Endurance = 4  :  Repos    =  37  = 
+Renne = Dasher  court 2460
+ name    = Comet  :  vitesse = 3  :  Endurance = 37  :  Repos    =  76  = 
+Renne = Comet  court 2493
+ name    = Prancer  :  vitesse = 9  :  Endurance = 12  :  Repos    =  97  = 
+Renne = Prancer  court 2484
+ name    = Dancer  :  vitesse = 37  :  Endurance = 1  :  Repos    =  36  = 
+Renne = Dancer  court 2516
+Gagnant = Donner
+Solution Solver14 solver14 0
+
+
+That's the right answer! You are one gold star closer to powering the weather machine. [Return to Day 14]
+
+ puzzle answer was 2655.
+
+The first half of this puzzle is complete! It provides one gold star: *
+
+--- Part Two ---
+
+Seeing how reindeer move in bursts, Santa decides he's not pleased with the old scoring system.
+
+Instead, at the end of each second, he awards one point to the reindeer currently in the lead. (If there are multiple reindeer tied for the lead, they each get one point.) He keeps the traditional 2503 second time limit, of course, as doing otherwise would be entirely ridiculous.
+
+Given the example reindeer from above, after the first second, Dancer is in the lead and gets one point. He stays in the lead until several seconds into Comet's second burst: after the 140th second, Comet pulls into the lead and gets his first point. Of course, since Dancer had been in the lead for the 139 seconds before that, he has accumulated 139 points by the 140th second.
+
+After the 1000th second, Dancer has accumulated 689 points, while poor Comet, our old champion, only has 312. So, with the new scoring system, Dancer would win (if the race ended at 1000 seconds).
+
+Again given the descriptions of each reindeer (in your puzzle input), after exactly 2503 seconds, how many points does the winning reindeer have?
+
+Although it hasn't changed, you can still get your puzzle input.
+
+Vixen : 1059
+maxpoints = 1059
+Solution Solver14 solver14 0
+
+That's the right answer! You are one gold star closer to powering the weather machine. You have completed Day 14! You can [Share] this victory or [Return to your advent calendar].
+
+///////////////////
+--- Day 15: Science for Hungry People ---
+
+Today, you set out on the task of perfecting your milk-dunking cookie recipe. All you have to do is find the right balance of ingredients.
+
+Your recipe leaves room for exactly 100 teaspoons of ingredients. You make a list of the remaining ingredients you could use to finish the recipe (your puzzle input) and their properties per teaspoon:
+
+capacity (how well it helps the cookie absorb milk)
+durability (how well it keeps the cookie intact when full of milk)
+flavor (how tasty it makes the cookie)
+texture (how it improves the feel of the cookie)
+calories (how many calories it adds to the cookie)
+You can only measure ingredients in whole-teaspoon amounts accurately, and you have to be accurate so you can reproduce your results in the future. The total score of a cookie can be found by adding up each of the properties (negative totals become 0) and then multiplying together everything except calories.
+
+For instance, suppose you have these two ingredients:
+
+Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8
+Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3
+Then, choosing to use 44 teaspoons of butterscotch and 56 teaspoons of cinnamon (because the amounts of each ingredient must add up to 100) would result in a cookie with the following properties:
+
+A capacity of 44*-1 + 56*2 = 68
+A durability of 44*-2 + 56*3 = 80
+A flavor of 44*6 + 56*-2 = 152
+A texture of 44*3 + 56*-1 = 76
+Multiplying these together (68 * 80 * 152 * 76, ignoring calories for now) results in a total score of 62842880, which happens to be the best score possible given these ingredients. If any properties had produced a negative total, it would have instead become zero, causing the whole score to multiply to zero.
+
+Given the ingredients in your kitchen and their properties, what is the total score of the highest-scoring cookie you can make?
+
+To begin, get your puzzle input.
+
+Answer: 
+ [Submit]
+18965440
+
+You can also [Share] this puzzle.
+
+
+That's the right answer! You are one gold star closer to powering the weather machine. [Return to Day 15]
+
+r puzzle answer was 18965440.
+
+The first half of this puzzle is complete! It provides one gold star: *
+
+--- Part Two ---
+
+Your cookie recipe becomes wildly popular! Someone asks if you can make another recipe that has exactly 500 calories per cookie (so they can use it as a meal replacement). Keep the rest of your award-winning process the same (100 teaspoons, same ingredients, same scoring system).
+
+For example, given the ingredients above, if you had instead selected 40 teaspoons of butterscotch and 60 teaspoons of cinnamon (which still adds to 100), the total calorie count would be 40*8 + 60*3 = 500. The total score would go down, though: only 57600000, the best you can do in such trying circumstances.
+
+Given the ingredients in your kitchen and their properties, what is the total score of the highest-scoring cookie you can make with a calorie total of 500?
+
+Although it hasn't changed, you can still get your puzzle input.
+
+points  pour i = 21 i2 = 23 i3 = 31 reste3 = 25 inter = 15862900
+
+That's the right answer! You are one gold star closer to powering the weather machine. You have completed Day 15! You can [Shareon Twitter Google+ Reddit] this victory or [Return to your adv
+
+ 
+ --- Day 16: Aunt Sue ---
+
+Your Aunt Sue has given you a wonderful gift, and you'd like to send her a thank you card. However, there's a small problem: she signed it "From, Aunt Sue".
+
+You have 500 Aunts named "Sue".
+
+So, to avoid sending the card to the wrong person, you need to figure out which Aunt Sue (which you conveniently number 1 to 500, for sanity) gave you the gift. You open the present and, as luck would have it, good ol' Aunt Sue got you a My First Crime Scene Analysis Machine! Just what you wanted. Or needed, as the case may be.
+
+The My First Crime Scene Analysis Machine (MFCSAM for short) can detect a few specific compounds in a given sample, as well as how many distinct kinds of those compounds there are. According to the instructions, these are what the MFCSAM can detect:
+
+children, by human DNA age analysis.
+cats. It doesn't differentiate individual breeds.
+Several seemingly random breeds of dog: samoyeds, pomeranians, akitas, and vizslas.
+goldfish. No other kinds of fish.
+trees, all in one group.
+cars, presumably by exhaust or gasoline or something.
+perfumes, which is handy, since many of your Aunts Sue wear a few kinds.
+In fact, many of your Aunts Sue have many of these. You put the wrapping from the gift into the MFCSAM. It beeps inquisitively at you a few times and then prints out a message on ticker tape:
+
+children: 3
+cats: 7
+samoyeds: 2
+pomeranians: 3
+akitas: 0
+vizslas: 0
+goldfish: 5
+trees: 3
+cars: 2
+perfumes: 1
+You make a list of the things you can remember about each Aunt Sue. Things missing from your list aren't zero - you simply don't remember the value.
+
+What is the number of the Sue that got you the gift?
+
+To begin, get your puzzle input.
+solver16 done  213
+Solution Solver16 solver16
+
+That's the right answer! You are one gold star closer to powering the weather machine. [Return to Day 16]
+
+Your puzzle answer was 213.
+
+The first half of this puzzle is complete! It provides one gold star: *
+
+--- Part Two ---
+
+As you're about to send the thank you note, something in the MFCSAM's instructions catches
+your eye. Apparently, it has an outdated retroencabulator, and so the output from the machine
+isn't exact values - some of them indicate ranges.
+
+In particular, the cats and trees readings indicates that there are greater than that many 
+(due to the unpredictable nuclear decay of cat dander and tree pollen), while the pomeranians
+and goldfish readings indicate that there are fewer than that many (due to the modial
+interaction of magnetoreluctance).
+
+What is the number of the real Aunt Sue?
+solver16 part2  323
+
+That's the right answer! You are one gold star closer to powering the weather machine. You have completed Day 16! You can [Share] this victory or [Return to your advent calendar].
+
+
+--- Day 17: No Such Thing as Too Much ---
+
+The elves bought too much eggnog again - 150 liters this time. 
+To fit it all into your refrigerator, you'll need to move it into smaller containers. 
+You take an inventory of the capacities of the available containers.
+
+For example, suppose you have containers of size 20, 15, 10, 5, and 5 liters. 
+If you need to store 25 liters, there are four ways to do it:
+
+15 and 10
+20 and 5 (the first 5)
+20 and 5 (the second 5)
+15, 5, and 5
+Filling all containers entirely, how many different combinations of containers can exactly fit all 150 liters of eggnog?
+
+To begin, get your puzzle input.
+
+Answer: 
+ [Submit]
+
+You can also [Share] this puzzle.
+
+4372
+That's the right answer! You are one gold star closer to powering the weather machine. [Return to Day 17]
+
+
+ur puzzle answer was 4372.
+
+The first half of this puzzle is complete! It provides one gold star: *
+
+--- Part Two ---
+
+While playing with all the containers in the kitchen, another load of eggnog arrives! The shipping and receiving department is requesting as many containers as you can spare.
+
+Find the minimum number of containers that can exactly fit all 150 liters of eggnog. How many different ways can you fill that number of containers and still hold exactly 150 litres?
+
+In the example above, the minimum number of containers was two. There were three ways to use that many containers, and so the answer there would be 3.
+
+Although it hasn't changed, you can still get your puzzle input.
+
+maxi_reste 16 nb_de_maxi 4
+Solution Solver17 : 4372
+That's the right answer! You are one gold star closer to powering the weather machine. You have completed Day 17! You can [Share] this victory or [Return to your advent calendar].
+
+--- Day 18: Like a GIF For Your Yard ---
+
+After the million lights incident, the fire code has gotten stricter: now, at most ten thousand lights are allowed. You arrange them in a 100x100 grid.
+
+Never one to let you down, Santa again mails you instructions on the ideal lighting configuration. With so few lights, he says, you'll have to resort to animation.
+
+Start by setting your lights to the included initial configuration (your puzzle input). A # means "on", and a . means "off".
+
+Then, animate your grid in steps, where each step decides the next configuration based on the current one. Each light's next state (either on or off) depends on its current state and the current states of the eight lights adjacent to it (including diagonals). Lights on the edge of the grid might have fewer than eight neighbors; the missing ones always count as "off".
+
+For example, in a simplified 6x6 grid, the light marked A has the neighbors numbered 1 through 8, and the light marked B, which is on an edge, only has the neighbors marked 1 through 5:
+
+1B5...
+234...
+......
+..123.
+..8A4.
+..765.
+The state a light should have next is based on its current state (on or off) plus the number of neighbors that are on:
+
+A light which is on stays on when 2 or 3 neighbors are on, and turns off otherwise.
+A light which is off turns on if exactly 3 neighbors are on, and stays off otherwise.
+All of the lights update simultaneously; they all consider the same current state before moving to the next.
+
+Here's a few steps from an example configuration of another 6x6 grid:
+
+Initial state:
+.#.#.#
+...##.
+#....#
+..#...
+#.#..#
+####..
+
+After 1 step:
+..##..
+..##.#
+...##.
+......
+#.....
+#.##..
+
+After 2 steps:
+..###.
+......
+..###.
+......
+.#....
+.#....
+
+After 3 steps:
+...#..
+......
+...#..
+..##..
+......
+......
+
+After 4 steps:
+......
+......
+..##..
+..##..
+......
+......
+After 4 steps, this example has four lights on.
+
+In your grid of 100x100 lights, given your initial configuration, how many lights are on after 100 steps?
+
+
+Solution Solver18 : solver 18 1061
+Your puzzle answer was 1061.
+
+The first half of this puzzle is complete! It provides one gold star: *
+
+--- Part Two ---
+
+You flip the instructions over; Santa goes on to point out that this is all just 
+an implementation of Conway's Game of Life. At least, it was, until you notice 
+that something's wrong with the grid of lights you bought: 
+four lights, one in each corner, are stuck on and can't be turned off. 
+The example above will actually run like this:
+
+Initial state:
+##.#.#
+...##.
+#....#
+..#...
+#.#..#
+####.#
+
+After 1 step:
+#.##.#
+####.#
+...##.
+......
+#...#.
+#.####
+
+After 2 steps:
+#..#.#
+#....#
+.#.##.
+...##.
+.#..##
+##.###
+
+After 3 steps:
+#...##
+####.#
+..##.#
+......
+##....
+####.#
+
+After 4 steps:
+#.####
+#....#
+...#..
+.##...
+#.....
+#.#..#
+
+After 5 steps:
+##.###
+.##..#
+.##...
+.##...
+#.#...
+##...#
+After 5 steps, this example now has 17 lights on.
+
+
+Solution Solver18 : solver 18 1006
+
+That's the right answer! You are one gold star closer to powering the weather machine. You have completed Day 18! You can [Share] this victory or [Return to your advent calendar].
+
+--- Day 19: Medicine for Rudolph ---
+
+Rudolph the Red-Nosed Reindeer is sick! His nose isn't shining very brightly, and he needs medicine.
+
+Red-Nosed Reindeer biology isn't similar to regular reindeer biology; Rudolph is going to need custom-made medicine. Unfortunately, Red-Nosed Reindeer chemistry isn't similar to regular reindeer chemistry, either.
+
+The North Pole is equipped with a Red-Nosed Reindeer nuclear fusion/fission plant, capable of constructing any Red-Nosed Reindeer molecule you need. It works by starting with some input molecule and then doing a series of replacements, one per step, until it has the right molecule.
+
+However, the machine has to be calibrated before it can be used. Calibration involves determining the number of molecules that can be generated in one step from a given starting point.
+
+For example, imagine a simpler machine that supports only the following replacements:
+
+H => HO
+H => OH
+O => HH
+Given the replacements above and starting with HOH, the following molecules could be generated:
+
+HOOH (via H => HO on the first H).
+HOHO (via H => HO on the second H).
+OHOH (via H => OH on the first H).
+HOOH (via H => OH on the second H).
+HHHH (via O => HH).
+So, in the example above, there are 4 distinct molecules (not five, because HOOH appears twice) after one replacement from HOH. Santa's favorite molecule, HOHOHO, can become 7 distinct molecules (over nine replacements: six from H, and three from O).
+
+The machine replaces without regard for the surrounding characters. For example, given the string H2O, the transition H => OO would result in OO2O.
+
+Your puzzle input describes all of the possible replacements and, at the bottom, the medicine molecule for which you need to calibrate the machine. How many distinct molecules can be created after all the different ways you can do one replacement on the medicine molecule?
+
+
+
+
+
