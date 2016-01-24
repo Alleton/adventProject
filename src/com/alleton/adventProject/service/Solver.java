@@ -107,9 +107,22 @@ public class Solver {
 			case 17: {
 				System.out.println("Chargement pb " + problem ) ; 
 				Solver17 Solver17 = new Solver17();
-				System.out.println("Solution Solver17 " + Solver17.solver17(sfname));
+				System.out.println("Solution Solver17 : " + Solver17.solver17(sfname));
 				break;		
 			}
+			case 18: {
+				System.out.println("Chargement pb " + problem ) ; 
+				Solver18 Solver18 = new Solver18();
+				System.out.println("Solution Solver18 : " + Solver18.solver18(sfname));
+				break;		
+			}
+			case 19: {
+				System.out.println("Chargement pb " + problem ) ; 
+				Solver19 Solver19 = new Solver19();
+				System.out.println("Solution Solver19 : " + Solver19.solver19(sfname));
+				break;		
+			}
+
 			default:
 				System.out.println("Pas de tentative de resolution du projet : " + problem ) ;
 			}
