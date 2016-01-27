@@ -9,13 +9,17 @@ import org.apache.commons.lang3.StringUtils;
 
 public class Solver191 {
 	int taille  ;
-	
+	final int SOURCEELECTRON = 3 ;
 	final String electron = "e" ;
+	
+	final String Ar = "Ar" ;
+	final String Rn = "Rn" ;
+	final String Y = "Y" ;
+	
 	//final String  electron  = "CRnCaSiRnBSiRnFArTiBPTiTiBFArPBCaSiThSiRnTiBPBPMgArCaSiRnTiMgArCaSiThCaSiRnFArRnSiRnFArTiTiBFArCaCaSiRnSiThCaCaSiRnMgArFYSiRnFYCaFArSiThCaSiThPBPTiMgArCaPRnSiAlArPBCaCaSiRnFYSiThCaRnFArArCaCaSiRnPBSiRnFArMgYCaCaCaCaSiThCaCaSiAlArCaCaSiRnPBSiAlArBCaCaCaCaSiThCaPBSiThPBPBCaSiRnFYFArSiThCaSiRnFArBCaCaSiRnFYFArSiThCaPBSiThCaSiRnPMgArRnFArPTiBCaPRnFArCaCaCaCaSiRnCaCaSiRnFYFArFArBCaSiThFArThSiThSiRnTiRnPMgArFArCaSiThCaPBCaSiRnBFArCaCaPRnCaCaPMgArSiRnFYFArCaSiThRnPBPMgAr" ;
 	
 	
 	
-	Vector<String> elements     = new Vector<String>(); 	// la liste des elements se transformant
 	Vector<String> listGenerate = new Vector<String>(); 	// la lecture
 	Vector<String> listAnalyse  = new Vector<String>(); 	// la liste analysee
 	
@@ -23,18 +27,22 @@ public class Solver191 {
 	Vector<String> moleAnalysees = new Vector<String>(); 	// les molecules analysees
 	
 	Vector<String> restictMolecule = new Vector<String>();	// les molecules crees pas en double
-	final String  MOLECULE  = "CRnCaSiRnBSiRnFArTiBPTiTiBFArPBCaSiThSiRnTiBPBPMgArCaSiRnTiMgArCaSiThCaSiRnFArRnSiRnFArTiTiBFArCaCaSiRnSiThCaCaSiRnMgArFYSiRnFYCaFArSiThCaSiThPBPTiMgArCaPRnSiAlArPBCaCaSiRnFYSiThCaRnFArArCaCaSiRnPBSiRnFArMgYCaCaCaCaSiThCaCaSiAlArCaCaSiRnPBSiAlArBCaCaCaCaSiThCaPBSiThPBPBCaSiRnFYFArSiThCaSiRnFArBCaCaSiRnFYFArSiThCaPBSiThCaSiRnPMgArRnFArPTiBCaPRnFArCaCaCaCaSiRnCaCaSiRnFYFArFArBCaSiThFArThSiThSiRnTiRnPMgArFArCaSiThCaPBCaSiRnBFArCaCaPRnCaCaPMgArSiRnFYFArCaSiThRnPBPMgAr" ;
 	
-	String maMoleculeFinale ; 
-	int moleculeFinaleLenth ;
-	int moleculeFinaleNbMoles ;
+	String maMoleculeFinale ;         // la molecule finale comme lue
+	Vector<String> maMoleculeFinaleV  = new Vector<String>() ; // la molecule finale en tant que vector
 	
+	Vector<String> sourceV = new Vector<String>();
+	Vector<String> butV = new Vector<String>(); 
 	
 	
 	int nbMoles = 0 ;
 	int nbMolesRestrict = 0 ;  // nb moles sans doublon
-	int maxProfondeur = 6;
+	int maxProfondeur = 8;
+	int transfoUtiles ;		//	le nombre de transformation sans les 3 derneires 
+	int transfoUtilesFin ;  // avec les 3 dernieres 
 	
+	
+	int nbTransfo = 0 ;
 	
 	Solver191 () {
 		// constructeur
@@ -45,215 +53,186 @@ public class Solver191 {
 		System.out.println("---------- solver191 ------------" )  ;
 		parselines(sfname);
 		
-		System.out.println("---------- parselines ------------" + maMoleculeFinale )  ;
+		System.out.println("---------- parselines done ------------"  )  ;
+		System.out.println("maMoleculeFinale ") ;
+		System.out.println(maMoleculeFinale ) ;
+		display_molecule (maMoleculeFinaleV) ;
 		
-		display_elements ();
-		System.out.println("---------- gener ------------" )  ;
-		display_generate ()  ;
-		analyse() ;
-		System.out.println("---------- analyse ------------" )  ;
-		display_analyse () ;
+		//System.out.println("---------- gener ------------" )  ;
+		//display_generate ()  ;
 		
-		// les transformations possibles sont dans  listAnalyse
-		
-		// decompose la molecule de depart depuis un vector electron vers un nouveau vecteur
-		
-		listDepart = moleAnalyse (electron ) ;
-		//listDepart contient la premiere molecule a analyser
+		// les transformations possibles sont dans  sourceV et butV
+		long tStart = System.nanoTime();
+		// optimisation
+		transfoUtilesFin = butV.size()   ; 
+		transfoUtiles = butV.size()  - SOURCEELECTRON  ;
 		
 		
-		// moleAnalyse ggod
+		//genereMoles (maMoleculeFinale , 0) ;
 		
-		System.out.println("---------- molecule ------------" )  ;
-		display_molecule (listDepart) ;
-
 		
-		// good
-		// genereMoles va etre recursif
-		genereMoles(listDepart , 0 ) ;
 		
-		enregistre (); 
+		nbTransfo = compte() ;
 		
-		return " Solver 191  fin " + maxProfondeur  ;
+		long tEnd = System.nanoTime();
+		double tDelta =  (double) (tEnd - tStart);
+		System.out.println(" duree en sec " + ( tDelta / 1000000000.0 ) );
+		
+		
+		return " Solver 191  fin " + nbTransfo  ;
 	}
-	
-	public void genereMoles (Vector<String> listDepart , int profondeur) {
-		String maMole = new String () ;
-		boolean doublon = false;
-		
-		profondeur ++ ;
-		/*
-		System.out.println(" " ) ; 
-		System.out.println("  genereMoles  " ) ;
-		System.out.println("  genereMoles  profondeur  " + profondeur ) ;
-		System.out.println("  genereMoles  a partir de " +  listDepart.toString() ) ;
-		System.out.println(" " ) ;
-		*/
-		
-		for ( int i =0 ; i <listDepart.size() ; i++) {
-			
-			// pour chacune des molecules de listDepart , gerene toutes les molecules possibles
-			String maMolecule = listDepart.elementAt(i);
-			// on recher cette molecule dans le liste analyse
-				// trouve : il faut creer toutes les nouvelles molecules
-				//System.out.println("combien de fils de " + maMolecule ) ; 
-				for ( int  j = 0  ; j<listAnalyse.size(); j++ ) {
-					// System.out.println( "profondeur = " + profondeur + " fils " + j +  " dans listAnalyse " + listAnalyse.elementAt(j) ) ;
-					String[] parts =listAnalyse.elementAt(j).split(";");
-					
-					//System.out.println("i ds 
-					 
-					
-					//int nbfils = parts.
-					if ( parts[0].equals(maMolecule)) {
-						//System.out.println("parts[0].equals(maMolecule)  " + parts[0] + " == "  + maMolecule) ; 
-						// System.out.println("parts[1]                     " + parts[1] ) ;
-						String[] fils =parts[1].split(":");
-						//nbMoles = nbMoles + fils.length ;
-						//System.out.println("Nombre d atomes de " + maMolecule  + " " +  fils.length  ) ;
-						//
-						Vector<String>  result = new Vector<String>();
-						for ( int k = 0 ; k<fils.length ; k ++) {
-							result.add(fils[k]) ;
-						}
-						
-						
-						// remplacer avec listDepart en param
-						//String newM = newMole(i,result);
-						// String newM = newMole(i,result, listDepart);
-						Vector<String> resultMoles = newVMole (i,result, listDepart); // le resultat sous forme de vecteur
-						// System.out.println("new vector Mole " + resultMoles.toString() ) ;
-						// TODO transforme en string , compare a MOLECULE
-						// et ajoute ( restrict ) a moles analysees
-						maMole = UneMoleToString(resultMoles) ;
-						doublon= addrestrict (profondeur , maMole ) ;
-						
-						if ( !doublon) {
-						
-						// System.out.println("new String Mole  " + profondeur + " : " + maMole ) ;
-						//System.out.println("new String Mole  " + profondeur + " : "  ) ;
-						if ( maMole.equals(maMoleculeFinale)) {
-							// on a fini ce morceau !!
-							System.out.println("+++++++++++ Gagne ++++++++ " + profondeur ) ; 
-							System.out.println("new String Mole  " + profondeur + " : " + maMole ) ;
-							maxProfondeur= profondeur ;      // ceci permettra de limiter la casse !!
-							// inutile de rafaire des transfo cela sera de trop
-						} else {
-							// teste cette molecule pas trop longue
-							// moleculeFinaleNbMoles
-							if ( resultMoles.size() < moleculeFinaleLenth  )	{
-								// teste cette molecule pas deja cree avec une profondeur moindre ..
-								if ( profondeur < maxProfondeur -1 ) {
-									// resursivite !!!! 
-									//  genereMoles (Vector<String> listDepart , int profondeur)
-									// System.out.println("Test new vector Mole " + resultMoles.toString() ) ;
-									genereMoles (resultMoles , profondeur  ) ;
-								}
-							}
-						}
-						nbMoles = nbMoles + 1 ;
-						
-					} // !doublon
-					}  //  parts[0].equals(maMolecule)
-				}
-			
-		}
-	} // genereMoles
 	
 	/*
-	 * boolean addrestrict (newMole)
-	 * ajoute newMole a la liste restrict
-	 * retourne true si c est un doublon
+	 * compte
+	 * compte le nombre de transfo necessaires pour reduire la chaine de depart
 	 */
-	public boolean addrestrict ( int prof , String newMole) {
-		boolean isdoublon = false ;
-		String newrestrict = newMole + ";" + prof ;
-/*		
-		if ( !newMole.equals(MOLECULE) ) {
-			if ( restictMolecule.indexOf(newMole) < 0 ) {
-				// pas trouve on add
-				restictMolecule.add(newMole) ;
-				nbMolesRestrict ++ ;
-			} else {
-				restictMolecule.add("doublon " + newMole) ;
-				isdoublon = true ;
-			}
-		}
-	*/	
-	
-		for( int i = 0 ; i < restictMolecule.size() ; i++ ) {
-			// if ( restictMolecule.elementAt(i).)
-			String[] parts =restictMolecule.elementAt(i).split(";");
-			if (( parts[0].equals(newMole)) && ( Integer.parseInt(parts[1]) <= prof)) {
-					// c est un doublon ou pire
-					isdoublon = true ;
-					newrestrict = newrestrict + "; doublon " ;
-					// pour le test
-					// restictMolecule.addElement(newMole + ";" + prof + "; doublon") ;
-			} else {
-				// restictMolecule.addElement(newMole + ";" + prof);
-			}
-		}
+	public int compte () {
+		int cpt = 0 ;
+		// remove Yx : elimine tous les Y
+		System.out.println(" remove Y "  + removeY ()  );
+		display_molecule (maMoleculeFinaleV) ;
 		
-		if ( !isdoublon) restictMolecule.addElement(newrestrict);
-	
+		// premieire passe rapide
+		// elimine toutes les molecules de type RnxAr
+		System.out.println ("removeRnxAr passe 1 ") ;
+		cpt = removeRnxAr ( ) ;
 		
-		return isdoublon ;
+		System.out.println("after removeRnxAr " ) ;
+		display_molecule (maMoleculeFinaleV) ;
+		
+		
+		// 
+		cpt = cpt  + shrink () ;
+		
+		System.out.println("after shrink " ) ;
+		display_molecule (maMoleculeFinaleV) ;
+		
+		
+		System.out.println(" shrink "  + cpt  );
+		
+		// deuxieme passe
+		// elimine toutes les molecules de type RnxAr
+		
+		System.out.println ("removeRnxAr passe 2 ") ;
+		cpt = cpt + removeRnxAr ( ) ;
+		display_molecule (maMoleculeFinaleV) ;
+		
+		// troiseme passe
+		System.out.println ("removeRnxAr passe 3 ") ;
+		cpt = cpt + removeRnxAr ( ) ;
+		display_molecule (maMoleculeFinaleV) ;
+		
+		// quatrieme passe
+		System.out.println ("removeRnxAr passe 4 ") ;
+		cpt = cpt + removeRnxAr ( ) ;
+		display_molecule (maMoleculeFinaleV) ;
+		
+		// 5eme passe
+		System.out.println ("removeRnxAr passe 5 ") ;
+		cpt = cpt + removeRnxAr ( ) ;
+		display_molecule (maMoleculeFinaleV) ;
+		
+		// 6eme passe
+		System.out.println ("removeRnxAr passe 6 ") ;
+		cpt = cpt + removeRnxAr ( ) ;
+		display_molecule (maMoleculeFinaleV) ;
+				
+		return cpt;
 	}
 	
-	String UneMoleToString (Vector<String> mole ) {
+	/* 
+	 * shrink
+	 */
+	int shrink (){
+		int cpt =0 ;
+		for ( int i = maMoleculeFinaleV.size() - 1  ; i > 2  ; i--) {
+			// en descendant 
+			if ( !maMoleculeFinaleV.elementAt(i).equals(Ar)  && 
+					 !maMoleculeFinaleV.elementAt(i  ).equals(Rn)  )  {
+				if ( !maMoleculeFinaleV.elementAt(i - 1 ).equals(Rn)  ){
+			
+					maMoleculeFinaleV.removeElementAt(i);
+					cpt = cpt + 1 ;
+					//i = i- 1 ;
+				}
+			}
+		}
+
+		
+		
+		
+		return cpt;
+		
+	}
+	
+	
+	/*
+	 * removeY
+	 * 
+	 * * compte le nombre de transfo necessaires pour reduire la chaine de depart
+	 * de toutes les molecules Y 
+	 * et les retire du vector ainsi que leur suivant
+	 */
+	public int removeY (){
+		int cpt = 0 ;
+		for ( int i = maMoleculeFinaleV.size() - 1  ; i > 2  ; i--) {
+			// en descendant 
+			if (maMoleculeFinaleV.elementAt(i).equals(Y)) {
+				maMoleculeFinaleV.removeElementAt(i);
+				maMoleculeFinaleV.removeElementAt(i);
+				cpt = cpt + 2 ;
+			}
+		}
+		System.out.println("after removeY " ) ;
+		display_molecule (maMoleculeFinaleV) ;
+		return cpt;
+	}
+	
+	
+	
+	/*
+	 * removeRnxAr
+	 * compte le nombre de transfo necessaires pour reduire la chaine de depart
+	 * de toutes les molecules de type RnxAr
+	 * et les retire du vector
+	 */
+	public int removeRnxAr () {
+		System.out.println(" compteRnxAr " ) ;
+		System.out.println(" maMoleculeFinaleV.size() "  +  maMoleculeFinaleV.size() )  ;
+		int nbTransfo = 0 ;
+		for ( int i = maMoleculeFinaleV.size() - 1  ; i > 2  ; i--) {
+			// en descendant 
+			if (maMoleculeFinaleV.elementAt(i).equals(Ar)) {
+				// on a trouve 
+				
+				if (maMoleculeFinaleV.elementAt(i-2).equals(Rn)) {
+					System.out.println(" compteRnxAr trouve at " + i ) ;
+					nbTransfo ++ ;
+					// System.out.println(" remove  maMoleculeFinaleV " + maMoleculeFinaleV.elementAt(i-2) ) ;
+					maMoleculeFinaleV.removeElementAt(i-2);
+					//System.out.println(" remove  maMoleculeFinaleV " + maMoleculeFinaleV.elementAt(i-2) ) ;
+					maMoleculeFinaleV.removeElementAt(i-2);
+					// System.out.println(" remove  maMoleculeFinaleV " + maMoleculeFinaleV.elementAt(i-2) ) ;
+					maMoleculeFinaleV.removeElementAt(i-2);
+					// on retire toujours la premiere pour eviter un test
+					i = i - 3 ; // on a retire 3 elements
+				}
+			}
+			
+		}
+		
+		display_molecule (maMoleculeFinaleV) ;
+		return nbTransfo ;
+	}
+	
+		
+	/*
+	 * 
+	 */
+	
+	public String  moleAnalyse(String mole , boolean finale) {
 		StringBuilder builder = new StringBuilder();
-		for ( int i = 0 ; i < mole.size() ; i++) {
-			builder.append(mole.elementAt(i)) ;
-		}						
 		
-		return  builder.toString();
-		
-		
-	}
-	
-	public Vector<String> newVMole (int pos , Vector<String> mole , Vector<String> laListDesMolecule) {
-		Vector<String> newVMoleRes = new Vector<String>(); ;
-		for ( int i =0 ; i < pos ; i ++) {
-			newVMoleRes.addElement( laListDesMolecule.elementAt(i)  );
-		}
-		// insertion transformation
-		// newVMoleRes.addElement( mole ) ;
-		for ( int i =0 ; i < mole.size() ; i++) {
-			newVMoleRes.add(mole.elementAt(i)) ;
-		}
-		
-		// fin 
-		for ( int i = pos +1 ; i < laListDesMolecule.size()  ; i ++) {
-			newVMoleRes.addElement( laListDesMolecule.elementAt(i)  );
-		}
-		
-		return newVMoleRes;
-	}
-	
-	
-	
-	public String newMole (int pos , String mole , Vector<String> laListDesMolecule) {
-		//System.out.println("newMole " + pos + " : " + mole )  ;
-		String newMolecule = "";
-		// debut de la molecule
-		for ( int i =0 ; i < pos ; i ++) {
-			newMolecule = newMolecule + laListDesMolecule.elementAt(i) ;
-		}
-		// insertion transformation
-		newMolecule = newMolecule + mole ;
-		
-		// fin de la molecule
-		for ( int i = pos +1 ; i < laListDesMolecule.size() ; i ++) {
-			newMolecule = newMolecule + laListDesMolecule.elementAt(i) ;
-		}
-		
-		return newMolecule;		
-	}
-	
-	public Vector<String>  moleAnalyse(String mole) {
-		System.out.println("---------- moleAnalyse ------------" )  ;
-		Vector<String> cetteMoleanalyse = new Vector<String>() ;
 		
 			//System.out.println("moleAnalyse " + mole  )  ;
 			String lettre = "";
@@ -289,62 +268,19 @@ public class Solver191 {
 					System.out.println("lettre  = " + lettre )  ;
 					
 				}
-				cetteMoleanalyse.addElement(start);
+				//cetteMoleanalyse.addElement(start);
+				//builder.append(start + ":") ;
+				builder.append(start ) ;
+				if ( finale ) {
+					//System.out.println("maMoleculeFinaleV  + " + start )  ;
+					maMoleculeFinaleV.addElement(start);
+				}
+				
 			}
-			return cetteMoleanalyse;
+			return   builder.toString();
 		
 	}
-	
-	/**
-	 * analyse
-	 * prends les resultats de listGenerate et les analyse dans listAnalyse
-	 */
-	public void analyse() {
-		System.out.println("---------- gener ------------" )  ;
-		for ( int i =0 ; i<listGenerate.size() ;i ++ ){
-			String gener =  listGenerate.elementAt(i);
-			String lettre = "";
-			//for (int j = 0 ; j< )
-			String[] parts =gener.split(";");
-			String start = parts[0] + ";" ;      // on respecte cette formulation
-			// la chaine a analyser
-			String anal  = parts[1];
-			// System.out.println("analyser " + anal  )  ;
-			for (int  j = 0 ; j< anal.length() ; j++){
-				lettre = anal.substring(j, j+1) ;
-				// recherche de elemnts crees
-				// on ne cree que de VRAIS elements :Majucule + (eventuellement) minuscule
-				// on DOIT trouver une majuscule sinon erreur
-				
-				if ( StringUtils.isAllUpperCase(lettre)) {
-					// recheche une minuscule si pas fini
-					if ( j < anal.length() - 1 ) {
-						//isAllLowerCase
-						if ( StringUtils.isAllLowerCase(anal.substring(j+1, j+2))) {
-							// Element en 2 lettres
-							start = start  + lettre + anal.substring(j+1, j+2) + ":";
-							j ++ ;
-						} else {
-							start = start + lettre + ":";
-						}
-						
-					} else {
-						// derniere lettre  on ajoute
-						start = start + lettre + ":";
-					} 
-					
-				} else {
-					// pas une majuscule : erreur
-					System.out.println("---------- error ------------" )  ;
-					System.out.println("anal = " + anal )  ;
-					System.out.println("pos  = " + j )  ;
-					System.out.println("lettre  = " + lettre )  ;
-					
-				}
-			}
-			listAnalyse.addElement(start);
-		}
-	}
+
 	
 	
 	public void display_generate () {
@@ -360,26 +296,20 @@ public class Solver191 {
 		}
 	}
 	
-	
-	public void display_elements () {
-		for ( int i =0 ; i < elements.size() ; i++) {
-			System.out.println(elements.elementAt(i));
-		}
-	}
 
-	// listAnalyse
-	public void display_analyse () {
-		for ( int i =0 ; i < listAnalyse.size() ; i++) {
-			System.out.println(listAnalyse.elementAt(i));
-		}
-	}
 	
 	//list moles
 	public void display_molecule (Vector<String> moles) {
+		StringBuilder builder = new StringBuilder();
 		for ( int i =0 ; i < moles.size() ; i++) {
-			System.out.println(moles.elementAt(i));
+			//System.out.println(moles.elementAt(i));
+			builder.append(moles.elementAt(i));
+			
 		}
-	}
+		System.out.println("display molecule " ) ;
+		System.out.println("display molecule Length = " + moles.size() ) ;
+		System.out.println(builder.toString() ) ;
+	} //display_molecule
 	
 	
 	public void parselines(String sfname) {
@@ -391,22 +321,22 @@ public class Solver191 {
 			BufferedReader reader = new BufferedReader(filereader);
 			line = reader.readLine();
 			while ( line != null   && ! line.equals("") ) {
-				System.out.println ( "line "  + line  ) ;
+				//System.out.println ( "line "  + line  ) ;
 					taille ++ ;
 					String[] parts =line.split(" ");
 					// ajoute element si pas deja connu
-					if ( ! elements.contains(parts[0]))	elements.add(parts[0]) ;
-				
+					
 					// listGenerate
 					listGenerate.addElement(parts[0] + ";" + parts[2]);
 					line = reader.readLine();
 				
 			}
-			maMoleculeFinale = reader.readLine(); // le but
-			moleculeFinaleLenth = maMoleculeFinale.length();    // permets de s'arreter a temps ...
-			moleculeFinaleNbMoles = moleAnalyse(maMoleculeFinale).size();
-			System.out.println ("moleculeFinaleNbMoles " + moleculeFinaleNbMoles ) ;
-			System.out.println ("maMoleculeFinale " + maMoleculeFinale ) ; 
+			maMoleculeFinale = moleAnalyse (reader.readLine() ,true ); // le but
+			//moleculeFinaleLenth = maMoleculeFinale.length();    // permets de s'arreter a temps ...
+			//moleculeFinaleNbMoles = moleAnalyse(maMoleculeFinale).size();
+			
+			//System.out.println ("moleculeFinaleNbMoles " + moleculeFinaleNbMoles ) ;
+			//System.out.println ("maMoleculeFinale " + maMoleculeFinale ) ; 
 			reader.close();
 			
 		reader.close();
@@ -434,3 +364,4 @@ public class Solver191 {
 	} // enregistre
 	
 }
+
