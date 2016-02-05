@@ -136,13 +136,13 @@ public class Solver22Spell {
 		
 		StringBuilder builder = new StringBuilder();
 		
-		builder.append( "name    = " + this.getSpellName()  + "  : " ) ;
-		builder.append( "cost    = " + this.getSpellCost()  + "  : " ) ;
-		builder.append( "Damage    = " + this.getSpellDamage()  + "  : " ) ;
-		builder.append( "Healing    = " + this.getSpellHealing()  + "  : " ) ;
-		builder.append( "Armor   = " + this.getSpellArmor()  + "  : " ) ;
-		builder.append( "Lasting   = " + this.getSpellLasting()  + "  : " ) ;
-		builder.append( "Recharge   = " + getSpellRecharge()  + "  : " ) ;
+		builder.append( "n = " + this.getSpellName()  + "  : " ) ;
+		//builder.append( "c = " + this.getSpellCost()  + "  : " ) ;
+		//builder.append( "D = " + this.getSpellDamage()  + "  : " ) ;
+		//builder.append( "H = " + this.getSpellHealing()  + "  : " ) ;
+		// builder.append( "A = " + this.getSpellArmor()  + "  : " ) ;
+		builder.append( "L  = " + this.getSpellLasting()  + "  : " ) ;
+		// builder.append( "R  = " + getSpellRecharge()  ) ;
 		
 		return  builder.toString();
 		
