@@ -118,11 +118,42 @@ public class Solver {
 			}
 			case 19: {
 				System.out.println("Chargement pb " + problem ) ; 
-				Solver19 Solver19 = new Solver19();
-				System.out.println("Solution Solver19 : " + Solver19.solver19(sfname));
+				//Solver19 Solver19 = new Solver19();
+				//System.out.println("Solution Solver19 : " + Solver19.solver19(sfname));
+				
+				Solver191 Solver191 = new Solver191();
+				System.out.println("Solution Solver191 : " + Solver191.solver191(sfname));
+				
+				break;		
+			}
+			case 20: {
+				System.out.println("Chargement pb " + problem ) ; 
+				Solver20 Solver20 = new Solver20();
+				System.out.println("Solution Solver20 : " + Solver20.solver20(sfname));
 				break;		
 			}
 
+			case 21: {
+				System.out.println("Chargement pb " + problem ) ; 
+				Solver21 Solver21 = new Solver21();
+				System.out.println("Solution Solver21 : " + Solver21.solver21(sfname));
+				break;		
+			}
+
+			case 22: {
+				System.out.println("Chargement pb " + problem ) ; 
+				Solver22 Solver22 = new Solver22();
+				System.out.println("Solution Solver22 : " + Solver22.solver22(sfname));
+				break;		
+			}
+
+			case 23: {
+				System.out.println("Chargement pb " + problem ) ; 
+				Solver23 Solver23 = new Solver23();
+				System.out.println("Solution Solver23 : " + Solver23.solver23(sfname));
+				break;		
+			}
+			
 			default:
 				System.out.println("Pas de tentative de resolution du projet : " + problem ) ;
 			}

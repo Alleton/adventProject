@@ -5,13 +5,13 @@ public class Chrono {
 	  /** Methode qui permet de demarrer le chronometre
 	   */
 	  public void start(){
-	    deb=System.currentTimeMillis();
+		   deb = (long)System.currentTimeMillis();
 	  }
 	  /** Methode qui retourne le temps ecoulé depuis le demarrage du chronomètre
 	   *@return long representant le temps ecoule
 	   */
 	  public long getTimeElapsed(){
-	    return System.currentTimeMillis()-deb;
+	    return ( (long)System.currentTimeMillis() ) -deb;
 	  }
 	  /** Methode qui stop le chronomètre et conserve le temps ecoule depuis son demarrage
 	   */
@@ -22,6 +22,6 @@ public class Chrono {
 	   *@return long représentant le temps ecoule
 	   */
 	  public long getFinalTimeElapsed(){
-	    return fin-deb;
+	    return ( getTimeElapsed() - deb );
 	  }
 }

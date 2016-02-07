@@ -12,22 +12,25 @@ public class Solver22 {
 	Vector<Solver22Spell> theSpells  = new Vector<Solver22Spell>(); 
 	Solver22Situation initialSituation = new Solver22Situation (); 
 	
-//	final int	bossHitPoints = 71 ;
-//	final int	bossDamage = 10 ; 
-	final int	bossHitPoints = 13 ;
-	final int	bossDamage = 8 ; 
+	final int	bossHitPoints = 71 ;
+	final int	bossDamage = 10 ; 
+//	final int	bossHitPoints = 14 ;
+//	final int	bossDamage = 8 ; 
 
 	
-//	final int myHitPoints = 50 ;
-//	final int myMana = 500 ;
-	final int myHitPoints = 10 ;
-	final int myMana = 250 ;
+	final int myHitPoints = 50 ;
+	final int myMana = 500 ;
+	
+	final int part2 = 1 ;
+	
+//	final int myHitPoints = 10 ;
+//	final int myMana = 250 ;
 
 	
 	final int minSpellCost = 53;
 	
 	
-	final int maxLevel = 6 ; //
+	final int maxLevel = 16 ; //
 	int level = 0 ; // at start
 	int minSpent = 99999 ;
 	
@@ -62,22 +65,23 @@ public class Solver22 {
 		int thisLevel = oldSituation.getLevel() ;
 		
 		if ( thisLevel > maxLevel) {
-			 System.out.println("\n ** maxLevel ** \n") ;
+			 //System.out.println("** maxLevel ** ") ;
 			return true;
 		} else {
 			thisLevel ++ ;
 		}
-		System.out.println("** Part1  level " + thisLevel  );
+		//System.out.println("** Part1  level " + thisLevel  );
+		//System.out.println( thisLevel  );
 		
 		
-		System.out.println( "old situ \n"  + oldSituation.situationToStringDetail()  );
-		if ( oldSituation.getSpend() > minSpent ) {
-			System.out.println("trop ");
+		//System.out.println( "old situ \n"  + oldSituation.situationToStringDetail()  );
+		if ( (oldSituation.getSpend() + minSpellCost ) > minSpent ) {
+			//System.out.println("trop ");
 			return true ;
 		}
 		
-		if ( oldSituation.getMyPoints() <= 0 ) {
-			System.out.println("mort ");
+		if ( oldSituation.getMyPoints() <= part2 ) {
+			//System.out.println("mort ");
 			return true ;
 		}
 		
@@ -94,16 +98,16 @@ public class Solver22 {
 		newSitu.setMyMana(oldSituation.getMyMana());
 		newSitu.copyArray(oldSituation); // variable intermediaire
 		// level
-		newSitu.setLevel(thisLevel);
+		//newSitu.setLevel(thisLevel);
 
-		int mHit = oldSituation.getMyPoints() ;
+		int mHit = oldSituation.getMyPoints() - part2 ;        // allow for part2
 		int bHit = oldSituation.getBossPoints();
 		int shield = 0;
 		
 		// My Turn 
 		// boucle sur tous les spells en cours
 		
-		System.out.println("My turn start effects");
+		// System.out.println("My turn start effects");
 		for ( int j = 0 ; j < theSpells.size() ; j ++ ) {
 			 // j est le numero de spell teste
 			if ((oldSituation.getRemainingArray()[j] > 0 )) { 
@@ -129,15 +133,15 @@ public class Solver22 {
 		
 		
 
-		System.out.println("My turn end effects");
+		//System.out.println("My turn end effects");
 		newSitu.setBossPoints(bHit);
 		newSitu.setMyPoints(mHit);
 		newSitu.setLevel(thisLevel);
 		newSitu.setArmor(shield);
-		System.out.println( newSitu.situationToStringDetail()  );
+		//System.out.println( newSitu.situationToStringDetail()  );
 		
 		
-		System.out.println("My turn start new spell");
+		//System.out.println("My turn start new spell");
 //		boolean assezDeMana = false ;
 		
 		for ( int i  = 0 ; i < theSpells.size() ; i++) {
@@ -149,7 +153,7 @@ public class Solver22 {
 			if ( newSitu.getRemainingArray()[i] == 0  ){	
 				
 				//System.out.println(theSpells.elementAt(i).getSpellName().substring(0,1)   + thisLevel )  ;
-				System.out.println("\n\n Try " + theSpells.elementAt(i).getSpellName() + " Level "   + thisLevel )  ;
+				//System.out.println( theSpells.elementAt(i).getSpellName() + " Level "   + thisLevel )  ;
 				
 				int cost   = theSpells.elementAt(i).getSpellCost() ;
 				// 2 variable sintermediaires
@@ -158,7 +162,7 @@ public class Solver22 {
 				
 				
 				if ( cost < newSitu.getMyMana() )   {
-					System.out.println(" assez de mana " + newSitu.getMyMana() ) ;
+					//System.out.println(" assez de mana " + newSitu.getMyMana() ) ;
 					// assez de mana pour essayer
 					// et pas trop de depenses
 					
@@ -193,7 +197,7 @@ public class Solver22 {
 		
 				 if (bHitInterne <= 0) {
 					 System.out.println("Gagne !! ");
-					 System.out.println("Avec choix spell " + theSpells.elementAt(i).getSpellName() ) ;
+					 System.out.println("Avec choix spell " + theSpells.elementAt(i).getSpellName() + " level " + thisLevel ) ;
 					 System.out.println(" au cout de " +  cost  + " Soit au total "  + newSituation.getSpend() );
 					 System.out.println( oldSituation.situationToString()  + "\n\n ");
 					 
@@ -214,9 +218,9 @@ public class Solver22 {
 				//newSituation.setArmor(newSitu.getArmor());
 					
 					// Boss Turn
-					System.out.println("Boss turn "  );
-					System.out.println("New Situ = " + newSituation.situationToStringDetail() ) ;
-					System.out.println("New Situ before spells = poison "  + newSituation.getRemainingArray()[3] ) ;
+					//System.out.println("Boss turn "  );
+					//System.out.println("New Situ = " + newSituation.situationToStringDetail() ) ;
+					//System.out.println("New Situ before spells = poison "  + newSituation.getRemainingArray()[3] ) ;
 					shield = 0 ; 
 					// boucle sur tous les spells en cours
 					for ( int j = 0 ; j < theSpells.size() ; j ++ ) {
@@ -231,8 +235,7 @@ public class Solver22 {
 							 // Healing
 							 mHitInterne = mHitInterne +  theSpells.elementAt(j).getSpellHealing() ;
 							//  armor
-							 //newSitu.setArmor(    theSpells.elementAt(j).getSpellArmor() );
-							 shield = shield + theSpells.elementAt(j).getSpellArmor() ;
+							shield = shield + theSpells.elementAt(j).getSpellArmor() ;
 							 							 
 							 // gain mana mana
 							 newSituation.setMyMana( newSituation.getMyMana() + theSpells.elementAt(j).getSpellRecharge() ) ;
@@ -240,18 +243,17 @@ public class Solver22 {
 						 }   // newSituation.getMyspells().elementAt(j).getSpellLasting() > 0 
 						
 					 }  // j est le numero de spell teste
-					System.out.println("New Situ = poison "  + newSituation.getRemainingArray()[3] ) ;
 					
 					newSituation.setBossPoints(bHitInterne);
 					newSituation.setMyPoints(mHitInterne);
 					newSituation.setLevel(thisLevel);
 					newSituation.setArmor(shield);
-					System.out.println("New Situ after Boss Turn start = " + newSituation.situationToStringDetail() ) ;	
+					//System.out.println("New Situ after Boss Turn start = " + newSituation.situationToStringDetail() ) ;	
 					
 //
 				 if (bHitInterne <= 0) {
 					 System.out.println("Gagne !! ");
-					 System.out.println("Avec choix spell " + theSpells.elementAt(i).getSpellName() ) ;
+					 System.out.println("Avec choix spell " + theSpells.elementAt(i).getSpellName() + " level " + thisLevel ) ;
 					 System.out.println(" au cout de " +  cost  + " Soit au total "  + newSituation.getSpend() );
 					 System.out.println( oldSituation.situationToString()  + "\n\n ");
 					 
@@ -280,38 +282,38 @@ public class Solver22 {
 					
 				// Dead ??
 				mHitInterne = mHitInterne - bossAttack ;
-				System.out.println("after boss attack mHit " + mHitInterne ) ;
+				//System.out.println("after boss attack mHit " + mHitInterne ) ;
 				//System.out.println("mHit " + mHit );
 				if (mHitInterne <= 0) {
-					System.out.println("Perdu");
+					//System.out.println("Perdu");
 					 fini = true ;
 				} // mort
 					
 				// mise a jour newSituation
 				// et appel recursif
 				if ( !fini ) {
-					System.out.println(" => appel recursif "  );
+					//System.out.println(" => appel recursif "  );
 					newSituation.setBossPoints(bHitInterne);
 					newSituation.setMyPoints(mHitInterne);
 					newSituation.setLevel(thisLevel);
 					
-					System.out.println("newSituation");
-					System.out.println(newSituation.situationToString());
+					// System.out.println("newSituation");
+					//System.out.println(newSituation.situationToString());
 						// boolean testPart1 (Solver22Situation oldSituation)
 						// test c est la peine
 					if ( minSpellCost <= newSituation.getMyMana() ) {
 						fini = testPart1(newSituation) ;
 					} else {
-						System.out.println("Pas assez de mana to cast a spell");
+						//System.out.println("Pas assez de mana to cast a spell");
 					}
 							
 				} else {
-					 System.out.println("fini " + fini ) ;
+					 //System.out.println("fini " + fini ) ;
 				}
 					 
 				}  //  cost < oldSituation.getMyMana()
 				else {
-					System.out.println("Pas assez mana ");
+					//System.out.println("Pas assez mana ");
 				}
 			}		// if (oldSituation.getMyspells().elementAt(i).getSpellLasting() == 0 ) {
 		} 		//for ( int i  = 0 ; i < oldSituation.getMyspells().size() ; i++) {
@@ -322,7 +324,7 @@ public class Solver22 {
 	
 	
 	void initializeInitialSituation () {
-		System.out.println("initializeInitialSituation" ) ;
+		//System.out.println("initializeInitialSituation" ) ;
 		initialSituation.setBossPoints(bossHitPoints);
 		initialSituation.setMyPoints(myHitPoints);
 		initialSituation.setMyMana(myMana);
