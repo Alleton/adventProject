@@ -12,13 +12,16 @@ public class Solver23 {
 	String[] param1 = new String[nbInstructions] ;
 	int[] param2 = new int[nbInstructions] ; // param2 est tjrs un int
 	int step = 0 ;
-	int limite = 60 ; /// pour se limiter
+	int limite = 5160 ; /// pour se limiter
 	int nbsteps = 0 ;
 	
 	Solver23State theState = new Solver23State() ;
 	
 	public String solver23 (String sfname){
 		
+	// part2
+		
+		theState.setRega(1);
 		
 		System.out.println("---------- solver23 ------------" )  ;
 		parselines( sfname) ;
@@ -26,12 +29,19 @@ public class Solver23 {
 		
 		System.out.println(theState.stateToString());
 		// int new pos  = theState.apply( instruction , param 1 , param2 )
+		long tStart = System.nanoTime();
 		
 		while ( ( step >=0 ) && ( step < nbInstructions) && (nbsteps < limite)) {
 			step  = theState.apply( programInstructions[step] , param1[step] , param2[step] ) ;
 			nbsteps ++ ;
 			System.out.println("now nbsteps " + nbsteps + " "  + theState.stateToString() ) ;
+			if ( theState.getReg()[0] < 0 ) {
+				break ;
+			}
 		}
+		long tEnd = System.nanoTime();
+		double tDelta =  (double) (tEnd - tStart);
+		System.out.println(" duree en sec " + ( tDelta / 1000000000.0 ) );
 		
 		return ("Solver23 "  + theState.stateToString() ) ;
 		} //  end solver23
