@@ -153,6 +153,18 @@ public class Solver {
 				System.out.println("Solution Solver23 : " + Solver23.solver23(sfname));
 				break;		
 			}
+			case 24: {
+				System.out.println("Chargement pb " + problem ) ; 
+				Solver24 Solver24 = new Solver24();
+				System.out.println("Solution Solver24 : " + Solver24.solver24(sfname));
+				break;		
+			}
+			case 25: {
+				System.out.println("Chargement pb " + problem ) ; 
+				Solver25 Solver25 = new Solver25();
+				System.out.println("Solution Solver25 : " + Solver25.solver25(sfname));
+				break;		
+			}
 			
 			default:
 				System.out.println("Pas de tentative de resolution du projet : " + problem ) ;
